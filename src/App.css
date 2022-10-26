@@ -1,38 +1,56 @@
-.App {
-  text-align: center;
+/* For desktop: */
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+.bookView{
+    width:25%;
+    float:left;
+    padding:7px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.detailsBook{
+  background-color: #f0f0f0;
+  margin:10px;
+  padding:20px;
+  margin-top:-15vh;
+  opacity: 0.93;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+  border-radius:8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.bookListCard{
+  height:220px;
+}
+.bookList_cross{
+  background-color: #a6a6a6;
+  color:black;
+  padding:1px 4px;
+  border-radius: 50%;
+  border:3px solid black;
+}
+
+@media only screen and (max-width: 1000px) {
+  /* For mobile phones: */
+  [class*="col-"] {
+    width: 100%;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .bookView{
+    width:50%;
   }
-  to {
-    transform: rotate(360deg);
+  .bookCard{
+    height:255px;
+  }
+  .bookListCard{
+    height:240px;
   }
 }
