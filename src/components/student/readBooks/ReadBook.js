@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import LoadPDF from './LoadPDF.js';
+import { IFrame } from './iframe'
 
 export default function ReadBook() {
     const {bookID} = useParams();
     const [bookDetails, setBookDetails] = useState({});
 
     const methods = require('../../methods.js');
+    methods.Student_verification();
+
     const api = methods.API();
     useEffect(() => {
         axios.post(api+'/library/searchIndividualBook', {
@@ -21,26 +24,6 @@ export default function ReadBook() {
             });
     }, [])
     //<iframe src={bookDetails.book_link} width="100%" height="700"></iframe>
-    
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-
-    function onDocumentLoadSuccess({numPages}){
-        setNumPages(numPages);
-        setPageNumber(1);
-    }
-    
-    function changePage(offSet){
-        setPageNumber(prevPageNumber => prevPageNumber + offSet);
-    }
-    
-    function changePageBack(){
-        changePage(-1)
-    }
-
-    function changePageNext(){
-        changePage(+1)
-    }
 
     return (
         <div className='container'>
@@ -55,10 +38,12 @@ export default function ReadBook() {
                     </tr>
                 </table>
             </div>
+                <LoadPDF book_link={bookDetails.book_link}/>
             
-            <div className="">
-            <header className="App-header">
-                <Document file={bookDetails.book_link} onLoadSuccess={onDocumentLoadSuccess}>
+        </div>
+    )
+}
+/*<Document file={bookDetails.book_link} onLoadSuccess={onDocumentLoadSuccess}>
                 <Page height="700" pageNumber={pageNumber} />
                 </Document>
                 <p> Page {pageNumber} of {numPages}</p>
@@ -69,10 +54,29 @@ export default function ReadBook() {
                 pageNumber < numPages &&
                 <button onClick={changePageNext}>Next Page</button>
                 }
+                
+                
+        <div className="">
+            <header className="App-header">
+            <center>
+                <div>
+                <Document file={bookDetails.book_link} onLoadSuccess={onDocumentLoadSuccess}>
+                    {Array.from(
+                    new Array(numPages),
+                    (el,index) => (
+                        <Page 
+                        height="500"
+                        key={`page_${index+1}`}
+                        pageNumber={index+1}
+                        />
+                    )
+                    )}
+                </Document>
+                </div>
+            </center>
             </header>
-            </div>
-
-
         </div>
-    )
-}
+                
+                
+                
+                */

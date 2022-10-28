@@ -6,20 +6,24 @@ import { useState, useEffect } from 'react'
 
 export default function BookList() {
     const [bookListDetails, setBookListDetails] = useState([])
-    const [_id, set_id] = useState("191-35-2640")
+    const [_id, set_id] = useState(localStorage.getItem("auth_studentID"));
     
     const methods = require('../../methods.js');
+    methods.Student_verification();
+
     const api = methods.API();
     useEffect(() => {
-        axios.post(api+'/student/viewBookList', {
-            //parameters
-            studentID : _id
-        })
-            .then((response) => {
-                setBookListDetails(response.data.result)
-            }, (error) => {
-                console.log(error);
-            });
+        if(_id != ""){
+            axios.post(api+'/student/viewBookList', {
+                //parameters
+                studentID : _id
+            })
+                .then((response) => {
+                    setBookListDetails(response.data.result)
+                }, (error) => {
+                    console.log(error);
+                });
+        }
     }, [])
 
     let booklist = [];

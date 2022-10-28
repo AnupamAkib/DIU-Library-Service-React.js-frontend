@@ -37,6 +37,7 @@ export default function BookDetails() {
     let toast = require('../../toast.js');
 
     const methods = require('../../methods.js');
+    methods.Student_verification();
     const api = methods.API();
     useEffect(() => {
         axios.post(api+'/library/searchIndividualBook', {
@@ -56,22 +57,24 @@ export default function BookDetails() {
                 setaddedDate(response.data.result[0].added_date);
                 setLoading(false);
 
-                axios.post(api+'/student/checkInBookList', {
-                    //parameters
-                    bookID : response.data.result[0]._id,
-                    studentID : "191-35-2640" 
-                })
-                    .then((response) => {
-                        if(response.data.status == "not found"){
-                            setBookListFlag(false);
-                        }
-                        else{
-                            setBookListFlag(true);
-                        }
-                        setBookListBtnLoading(false);
-                    }, (error) => {
-                        console.log(error);
-                    });
+                if(localStorage.getItem("auth_studentID") != ""){
+                    axios.post(api+'/student/checkInBookList', {
+                        //parameters
+                        bookID : response.data.result[0]._id,
+                        studentID : localStorage.getItem("auth_studentID") 
+                    })
+                        .then((response) => {
+                            if(response.data.status == "not found"){
+                                setBookListFlag(false);
+                            }
+                            else{
+                                setBookListFlag(true);
+                            }
+                            setBookListBtnLoading(false);
+                        }, (error) => {
+                            console.log(error);
+                        });
+                }
             }, (error) => {
                 console.log(error);
             });
@@ -81,30 +84,33 @@ export default function BookDetails() {
 
     const saveInBookList = () =>{
         //_id
-        console.log("fgd")
+        setBookListBtnLoading(true);
         
         axios.post(api+'/student/addInBookList', {
             //parameters
             bookID : _id,
-            studentID : "191-35-2640" 
+            studentID : localStorage.getItem("auth_studentID") 
         })
             .then((response) => {
                 toast.msg("saved in booklist", "green", 2500);
                 setBookListFlag(true);
+                setBookListBtnLoading(false);
             }, (error) => {
                 console.log(error);
             });
     }
 
     const removeFromList = () =>{
+        setBookListBtnLoading(true)
         axios.post(api+'/student/removeFromBookList', {
             //parameters
             bookID : _id,
-            studentID : "191-35-2640" 
+            studentID : localStorage.getItem("auth_studentID") 
         })
             .then((response) => {
                 toast.msg("removed from booklist", "red", 2500);
                 setBookListFlag(false);
+                setBookListBtnLoading(false);
             }, (error) => {
                 console.log(error);
             });

@@ -2,23 +2,30 @@ import React from 'react'
 import BookCard from './BookCard'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function StudentHomePage() {
+  const navigate = useNavigate();
     const [allBooks, setAllBooks] = useState([]);
     const methods = require('../../methods.js');
     const api = methods.API();
 
+    methods.Student_verification();
+    
+    
+
     useEffect(() => {
-      axios.get(api+'/library/allBooks', {
-          //parameters
-          //empID, password
-      })
-          .then((response) => {
-              //response
-              setAllBooks(response.data.result);
-          }, (error) => {
-              console.log(error);
-          });
+        axios.get(api+'/library/allBooks', {
+            //parameters
+            //empID, password
+        })
+            .then((response) => {
+                //response
+                setAllBooks(response.data.result);
+            }, (error) => {
+                console.log(error);
+            });
     }, [])
 
     let bookCards = [];
@@ -37,8 +44,8 @@ export default function StudentHomePage() {
         )
     }
     return (
-      <div className='container'>
-        {bookCards}
-      </div>
+        <div className='container'>
+            {bookCards}
+        </div>
     )
 }
