@@ -9,7 +9,12 @@ export default function Registration() {
      useEffect(() => {
         //"http://software.diu.edu.bd:8189/result/studentInfo"
         //studentId=191-35-2640
-        fetch('http://software.diu.edu.bd:8189/result/studentInfo?studentId=' + studentID)
+        fetch(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`,{
+            method: 'GET',
+            headers: {
+                accepts: 'application/json'
+            }
+        })
             .then(response => response.json())
             .then((jsonData) => {
                 console.log(jsonData)
