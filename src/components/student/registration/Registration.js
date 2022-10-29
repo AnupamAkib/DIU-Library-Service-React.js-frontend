@@ -120,20 +120,17 @@ export default function Registration() {
                 }
                 else{
                     //do register
-                    axios.get("http://software.diu.edu.bd:8189/result/studentInfo", {
+                    axios.get(`/api/studentInfo?studentId=${studentID}`, {
                         //parameters
-                        params: {
-                            studentId : studentID
-                        }
                     })
                         .then((response) => {
-                            setviewError(response.data.studentName);
-                            setIdEmailProvided(true);
                             if(response.data.studentId != null){
                                 setStudentName(response.data.studentName);
                                 setDepartment(response.data.departmentName);
                                 setDegreeName(response.data.progShortName);
                                 setBatch(response.data.batchNo);
+                                setviewError(response.data.studentName);
+                            setIdEmailProvided(true);
                                 /*axios.post(api+'/system/send_mail', {
                                     //parameters
                                     sendTo: studentEmail,
@@ -185,7 +182,7 @@ export default function Registration() {
 
         e.preventDefault();
         try{
-            const res = await fetch(`/api/studentInfo?studentId=191-35-2640`,
+            const res = await fetch(`/api/studentInfo?studentId=${studentID}`,
                 {
                     method: "GET",
                     headers: {
@@ -212,7 +209,7 @@ export default function Registration() {
                     <NextPhase id={studentID} email={studentEmail} name={studentName} department={department} degree={degreeName} batch={batch} otp={OTP}/>
                 :
                     <>
-                    <form onSubmit={initialFormSubmit_v2}>
+                    <form onSubmit={initialFormSubmit}>
                         <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
                         <TextField value={studentEmail} onChange={(e)=>setStudentEmail(e.target.value)} label="Enter DIU Email" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Email==""? false : true} helperText={errorMsg_Email} required/><br/>
                         <Button type="submit" variant="contained" fullWidth disabled={(studentID.length && studentEmail.length && errorMsg_ID=="" && errorMsg_Email=="")?  nextBtnLoading? true : false : true}>NEXT</Button>
