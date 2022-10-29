@@ -182,7 +182,7 @@ export default function Registration() {
 
     const initialFormSubmit_v2 = async (e) =>{
         e.preventDefault();
-        let diuAPI = `http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`;
+        let diuAPI = `/api/result/studentInfo?studentId=${studentID}`;
         try{
             const res = await fetch(diuAPI,
                 {
