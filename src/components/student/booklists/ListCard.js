@@ -52,13 +52,14 @@ export default function ListCard(props) {
         axios.post(api+'/student/removeFromBookList', {
             //parameters
             bookID : ID,
-            studentID : "191-35-2640" 
+            studentID : localStorage.getItem("auth_studentID")
         })
             .then((response) => {
                 toast.msg("Removed from booklist", "red", 2500);
             }, (error) => {
                 console.log(error);
             });
+        
     }
 
     return (

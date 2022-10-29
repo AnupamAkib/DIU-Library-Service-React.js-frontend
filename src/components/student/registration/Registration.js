@@ -5,30 +5,6 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 export default function Registration() {
-
-     useEffect(() => {
-        //"http://software.diu.edu.bd:8189/result/studentInfo"
-        //studentId=191-35-2640
-        fetch(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`,{
-            method: 'GET',
-            headers: {
-                accepts: 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then((jsonData) => {
-                console.log(jsonData)
-                alert(JSON.stringify(jsonData));
-            })
-            .catch((error) => {
-                console.error(error)
-                alert(error)
-                console.log("not found")
-            })
-    }, [])
-    
-
-
     const navigate = useNavigate();
     const [studentID, setStudentID] = useState("191-35-2640");
     const [studentEmail, setStudentEmail] = useState("anupam35-2640@diu.edu.bd");
@@ -124,7 +100,7 @@ export default function Registration() {
     const api = methods.API();
     let toast = require('../../toast.js');
 
-    const initialFormSubmit = (e) =>{
+    const initialFormSubmit = async (e) =>{
         e.preventDefault();
         let otp = methods.getRandomOTP();
         setOTP(otp);
@@ -200,9 +176,31 @@ export default function Registration() {
                 }
             }, (error) => {
                 console.log(error);
-                alert("error from individual student api")
             });
     }
+
+
+    const initialFormSubmit_v2 = async (e) =>{
+        e.preventDefault();
+
+        try{
+            const res = await fetch(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+            const data = await res.json();
+            console.log(data);
+            alert(JSON.stringify(data))
+        }catch(err){
+            alert(err);
+        }
+
+    }
+
 
     return (
         <div className='container col-4'>
@@ -212,7 +210,7 @@ export default function Registration() {
                     <NextPhase id={studentID} email={studentEmail} name={studentName} department={department} degree={degreeName} batch={batch} otp={OTP}/>
                 :
                     <>
-                    <form onSubmit={initialFormSubmit}>
+                    <form onSubmit={initialFormSubmit_v2}>
                         <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
                         <TextField value={studentEmail} onChange={(e)=>setStudentEmail(e.target.value)} label="Enter DIU Email" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Email==""? false : true} helperText={errorMsg_Email} required/><br/>
                         <Button type="submit" variant="contained" fullWidth disabled={(studentID.length && studentEmail.length && errorMsg_ID=="" && errorMsg_Email=="")?  nextBtnLoading? true : false : true}>NEXT</Button>

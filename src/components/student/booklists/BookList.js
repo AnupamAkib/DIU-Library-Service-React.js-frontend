@@ -45,7 +45,6 @@ export default function BookList() {
         <div className='container'>
             <center>
                 <h1>Book List</h1>
-                <font size="5">({booklist.length} Books)</font>
             </center>
             {
                 booklist.length? booklist : 

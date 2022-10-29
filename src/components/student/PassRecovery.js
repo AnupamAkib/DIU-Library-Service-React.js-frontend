@@ -71,6 +71,7 @@ export default function PassRecovery() {
                 else{
                     //not found
                     toast.msg("Student isn't registered or not found", "red", 3000);
+                    setBtnLoading(false);
                 }
             }, (error) => {
                 console.log(error);
