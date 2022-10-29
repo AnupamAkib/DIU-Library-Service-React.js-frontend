@@ -1,2 +1,2 @@
 /*  /index.html  200
-/api/* http://software.diu.edu.bd:8189/result/studentInfo/:splat 200!
+/api/* http://software.diu.edu.bd:8189/:splat 200
