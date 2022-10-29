@@ -126,6 +126,8 @@ export default function Registration() {
                         //parameters
                     })
                         .then((response) => {
+                            setviewError(response.data.studentName);
+                            setIdEmailProvided(true);
                             if(response.data.studentId != null){
                                 setStudentName(response.data.studentName);
                                 setDepartment(response.data.departmentName);
@@ -160,8 +162,7 @@ export default function Registration() {
                                         console.log(error);
                                         setviewError(error);
                                 });*/
-                                setviewError(response.data.studentName);
-                                setIdEmailProvided(true);
+                                
                             }
                             else{
                                 toast.msg("Student not found", "red", 3000);
