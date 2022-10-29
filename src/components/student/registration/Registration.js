@@ -6,6 +6,24 @@ import { useNavigate } from 'react-router-dom'
 
 
 export default function Registration() {
+
+    useEffect(() => {
+        axios.get("http://software.diu.edu.bd:8189/result/studentInfo", {
+            //parameters
+            params: {
+                studentId : studentID
+            }
+        })
+            .then((response) => {
+                alert(JSON.stringify(response.data));
+            }, (error) => {
+                console.log(error);
+                alert(error)
+            });
+    }, [])
+    
+
+
     const navigate = useNavigate();
     const [studentID, setStudentID] = useState("191-35-2640");
     const [studentEmail, setStudentEmail] = useState("anupam35-2640@diu.edu.bd");
