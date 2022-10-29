@@ -17,6 +17,7 @@ export default function Registration() {
             })
             .catch((error) => {
                 console.error(error)
+                alert(error)
                 console.log("not found")
             })
     }, [])
