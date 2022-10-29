@@ -121,7 +121,7 @@ export default function Registration() {
                 }
                 else{
                     //do register
-                    axios.get('http://software.diu.edu.bd:8189/result/studentInfo?studentId='+studentID, {
+                    /*axios.get('http://software.diu.edu.bd:8189/result/studentInfo?studentId='+studentID, {
                         //parameters
                     })
                         .then((response) => {
@@ -130,7 +130,7 @@ export default function Registration() {
                                 setDepartment(response.data.departmentName);
                                 setDegreeName(response.data.progShortName);
                                 setBatch(response.data.batchNo);
-                                /*axios.post(api+'/system/send_mail', {
+                                axios.post(api+'/system/send_mail', {
                                     //parameters
                                     sendTo: studentEmail,
                                     subject: "OTP for registration",
@@ -158,9 +158,9 @@ export default function Registration() {
                                     }, (error) => {
                                         console.log(error);
                                         setviewError(error);
-                                });*/
+                                });
 
-                                setIdEmailProvided(true);
+                                //setIdEmailProvided(true);
                             }
                             else{
                                 toast.msg("Student not found", "red", 3000);
@@ -168,7 +168,8 @@ export default function Registration() {
                             }
                         }, (error) => {
                             console.log(error);
-                        });
+                        });*/
+                        setIdEmailProvided(true);
                 }
             }, (error) => {
                 console.log(error);
