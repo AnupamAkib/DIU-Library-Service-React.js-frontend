@@ -121,8 +121,7 @@ export default function Registration() {
                 }
                 else{
                     //do register
-                    const diuAPI = 'http://software.diu.edu.bd:8189/result/studentInfo';
-                    axios.get(diuAPI, {
+                    axios.get("http://software.diu.edu.bd:8189/result/studentInfo", {
                         //parameters
                         params: {
                             studentId : studentID
@@ -173,12 +172,12 @@ export default function Registration() {
                             }
                         }, (error) => {
                             console.log(error);
-                            //alert("error from diu api")
+                            alert(error)
                         });
                 }
             }, (error) => {
                 console.log(error);
-                //alert("error from individual student api")
+                alert("error from individual student api")
             });
     }
 
