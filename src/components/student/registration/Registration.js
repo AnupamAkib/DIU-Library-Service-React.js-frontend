@@ -20,8 +20,6 @@ export default function Registration() {
     const [idEmailProvided, setIdEmailProvided] = useState(false);
     const [nextBtnLoading, setNextBtnLoading] = useState(false);
 
-    const [viewError, setviewError] = useState("");
-
     useEffect(() => {
         if(localStorage.getItem("auth_studentID")){
             navigate("/student/")
@@ -120,6 +118,7 @@ export default function Registration() {
                 }
                 else{
                     //do register
+                    //axios.get(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`, {
                     axios.get(`/api/studentInfo?studentId=${studentID}`, {
                         //parameters
                     })
@@ -129,9 +128,8 @@ export default function Registration() {
                                 setDepartment(response.data.departmentName);
                                 setDegreeName(response.data.progShortName);
                                 setBatch(response.data.batchNo);
-                                setviewError(response.data.studentName);
-                            setIdEmailProvided(true);
-                                /*axios.post(api+'/system/send_mail', {
+
+                                axios.post(api+'/system/send_mail', {
                                     //parameters
                                     sendTo: studentEmail,
                                     subject: "OTP for registration",
@@ -155,11 +153,10 @@ export default function Registration() {
                                     .then((response) => {
                                         setIdEmailProvided(true);
                                         setNextBtnLoading(false);
-                                        toast.msg("OTP send to your email. Please check", "", 4000);
+                                        toast.msg("OTP is sent to your email. Please check", "", 4000);
                                     }, (error) => {
                                         console.log(error);
-                                        setviewError(error);
-                                });*/
+                                });
                                 
                             }
                             else{
@@ -168,36 +165,11 @@ export default function Registration() {
                             }
                         }, (error) => {
                             console.log(error);
-                            alert(error)
                         });
                 }
             }, (error) => {
                 console.log(error);
             });
-    }
-
-
-    const initialFormSubmit_v2 = async (e) =>{
-        ///*  /index.html  200
-
-        e.preventDefault();
-        try{
-            const res = await fetch(`/api/studentInfo?studentId=${studentID}`,
-                {
-                    method: "GET",
-                    headers: {
-                        'Accept': 'application/json',
-                        "Content-Type": "application/json;charset=UTF-8",
-                        body: JSON.stringify({})
-                    }
-                }
-            );
-            const data = await res.json();
-            console.log(data);
-            //alert(JSON.stringify(data))
-        }catch(err){
-            console.log(err);
-        }
     }
 
 
@@ -217,7 +189,7 @@ export default function Registration() {
                     <Button size="small" onClick={()=>navigate("/student/login")} variant="text" fullWidth>Already registered? login here</Button>
                     </>
                 }
-                <br/>{viewError}
+                <br/>
             </div>
         </div>
     )

@@ -146,7 +146,7 @@ export default function NextPhase(props) {
 
     return (
         <form onSubmit={doRegister}>
-            Please do not refresh the page <br/>
+            <div style={{padding:"8px", color:"red", fontSize:"small"}}>* Please do not refresh the page</div>
             <TextField value={id} label="Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth required inputProps={{ readOnly: true }}/><br/>
             <TextField value={name} label="Student Name" variant="filled" style={{marginBottom:"8px"}} fullWidth required inputProps={{ readOnly: true }}/><br/>
             <TextField value={email} label="Student Email" variant="filled" style={{marginBottom:"8px"}} fullWidth required inputProps={{ readOnly: true }}/><br/>

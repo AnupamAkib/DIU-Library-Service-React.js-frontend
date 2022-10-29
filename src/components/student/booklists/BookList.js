@@ -44,11 +44,24 @@ export default function BookList() {
     return (
         <div className='container'>
             <center>
-                <h1>Book List</h1>
+                <h1>My Book List</h1>
             </center>
             {
                 booklist.length? booklist : 
-                <h2><br/><br/><center>Nothing in your Booklist</center></h2>
+                <center>
+                    <br/><br/><br/><br/>
+                    <div style={{
+                        backgroundImage: `url('/booklist.png')`, 
+                        height:"10vh",
+                        width:"10vh",
+                        backgroundRepeat:"no-repeat",
+                        backgroundSize: 'cover'
+                    }}>
+                    </div><br/>
+                    <h2>
+                    Nothing in your Booklist
+                    </h2>
+                </center>
             }
         </div>
     )

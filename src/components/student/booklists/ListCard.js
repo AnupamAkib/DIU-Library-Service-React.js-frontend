@@ -55,7 +55,7 @@ export default function ListCard(props) {
             studentID : localStorage.getItem("auth_studentID")
         })
             .then((response) => {
-                toast.msg("Removed from booklist", "red", 2500);
+                toast.msg("Book removed from booklist", "red", 2500);
             }, (error) => {
                 console.log(error);
             });

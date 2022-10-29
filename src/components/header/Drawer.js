@@ -27,12 +27,13 @@ const DrawerComp = (props) => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
+        <br/>
+            <center><img src="/library_logo.png" width="150"/></center>
+            <br/>
         {
           localStorage.getItem("auth_studentID")?
           <div style={{padding:"18px"}}>
-            <br/>
-            <center><img src="/library_logo.png" width="150"/></center>
-            <br/>
+            
             <b>{localStorage.getItem("auth_studentName")}</b>
             <br/>
             {localStorage.getItem("auth_studentID")}<br/>

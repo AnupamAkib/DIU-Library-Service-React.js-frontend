@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import Loading from '../../Loading.js';
 
 export default function BookDetails() {
     const navigate = useNavigate();
@@ -118,7 +119,7 @@ export default function BookDetails() {
     
     if(loading){
         return (
-            <div>LOADING...</div>
+            <Loading/>
         )
     }
     return (

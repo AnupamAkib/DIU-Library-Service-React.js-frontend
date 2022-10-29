@@ -3,7 +3,7 @@ import BookCard from './BookCard'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import Loading from '../../Loading';
 
 export default function StudentHomePage() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function StudentHomePage() {
 
     methods.Student_verification();
     
-    
+    const [dataLoading, setDataLoading] = useState(true);
 
     useEffect(() => {
         axios.get(api+'/library/allBooks', {
@@ -23,6 +23,7 @@ export default function StudentHomePage() {
             .then((response) => {
                 //response
                 setAllBooks(response.data.result);
+                setDataLoading(false);
             }, (error) => {
                 console.log(error);
             });
@@ -43,6 +44,11 @@ export default function StudentHomePage() {
             />
         )
     }
+
+    if(dataLoading){
+        return <Loading/>
+    }
+
     return (
         <div className='container'>
             <center>

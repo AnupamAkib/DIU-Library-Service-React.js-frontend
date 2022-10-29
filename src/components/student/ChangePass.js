@@ -110,9 +110,9 @@ export default function ChangePass() {
             <div className='inputContainer'>
                 <h1 align='center'>Change Password</h1>
                 <form onSubmit={changePass}>
-                    <TextField type="password" value={curPass} onChange={(e)=>setCurPass(e.target.value)} id="filled-basic" label="Enter Current Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_curPass==""? false : true} helperText={errorMsg_curPass} required/><br/>
-                    <TextField type="password" value={newPass} onChange={(e)=>setNewPass(e.target.value)} id="filled-basic" label="Enter New Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_newPass==""? false : true} helperText={errorMsg_newPass} required/><br/>
-                    <TextField type="password" value={newPassAgain} onChange={(e)=>setNewPassAgain(e.target.value)} id="filled-basic" label="Re-enter New Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_newPassAgain==""? false : true} helperText={errorMsg_newPassAgain} required/><br/>
+                    <TextField type="password" value={curPass} onChange={(e)=>setCurPass(e.target.value)} label="Enter Current Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_curPass==""? false : true} helperText={errorMsg_curPass} required/><br/>
+                    <TextField type="password" value={newPass} onChange={(e)=>setNewPass(e.target.value)} label="Enter New Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_newPass==""? false : true} helperText={errorMsg_newPass} required/><br/>
+                    <TextField type="password" value={newPassAgain} onChange={(e)=>setNewPassAgain(e.target.value)} label="Re-enter New Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_newPassAgain==""? false : true} helperText={errorMsg_newPassAgain} required/><br/>
                     <Button type="submit" variant="contained" fullWidth disabled={(errorMsg_curPass=="" && curPass.length && errorMsg_newPass=="" && newPass.length && errorMsg_newPassAgain=="" && newPassAgain.length)? btnLoading? true : false : true}>Change password</Button>
                 </form>
             </div>

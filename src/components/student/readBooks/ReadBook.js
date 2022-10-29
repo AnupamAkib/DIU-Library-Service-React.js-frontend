@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import LoadPDF from './LoadPDF.js';
+import Loading from '../../Loading.js';
 
 export default function ReadBook() {
     const {bookID} = useParams();
     const [bookDetails, setBookDetails] = useState({});
+    const [loading, setLoading] = useState(true)
 
     const methods = require('../../methods.js');
     methods.Student_verification();
@@ -18,11 +20,16 @@ export default function ReadBook() {
         })
             .then((response) => {
                 setBookDetails(response.data.result[0]);
+                setLoading(false);
             }, (error) => {
                 console.log(error);
             });
     }, [])
     //<iframe src={bookDetails.book_link} width="100%" height="700"></iframe>
+
+    if(loading){
+        return <Loading/>
+    }
 
     return (
         <div className='container'>

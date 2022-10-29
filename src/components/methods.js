@@ -17,6 +17,7 @@ function Student_verification(){
     let toast = require('./toast.js');
     
     useEffect(() => {
+        //console.log(auth_password)
         axios.post(API()+'/student/individualStudentInfo', {
             //parameters
             studentID : auth_studentID
