@@ -4,22 +4,21 @@ import NextPhase from './NextPhase'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-
 export default function Registration() {
 
-    useEffect(() => {
-        axios.get("http://software.diu.edu.bd:8189/result/studentInfo", {
-            //parameters
-            params: {
-                studentId : studentID
-            }
-        })
-            .then((response) => {
-                alert(JSON.stringify(response.data));
-            }, (error) => {
-                console.log(error);
-                alert(error)
-            });
+     useEffect(() => {
+        //"http://software.diu.edu.bd:8189/result/studentInfo"
+        //studentId=191-35-2640
+        fetch('http://software.diu.edu.bd:8189/result/studentInfo?studentId=' + studentID)
+            .then(response => response.json())
+            .then((jsonData) => {
+                console.log(jsonData)
+                alert(JSON.stringify(jsonData));
+            })
+            .catch((error) => {
+                console.error(error)
+                console.log("not found")
+            })
     }, [])
     
 
