@@ -27,6 +27,18 @@ const DrawerComp = (props) => {
         open={openDrawer}
         onClose={() => setOpenDrawer(false)}
       >
+        {
+          localStorage.getItem("auth_studentID")?
+          <div style={{padding:"18px"}}>
+            <br/>
+            <center><img src="/library_logo.png" width="150"/></center>
+            <br/>
+            <b>{localStorage.getItem("auth_studentName")}</b>
+            <br/>
+            {localStorage.getItem("auth_studentID")}<br/>
+            {localStorage.getItem("auth_studentDept")}
+          </div> : <></>
+        }
         <List sx={{width:"220px"}} onClick={()=>setOpenDrawer(false)}>
           {pages.map((page, index) => (
             <ListItemButton key={index} onClick={()=>navigate(page.href)}>

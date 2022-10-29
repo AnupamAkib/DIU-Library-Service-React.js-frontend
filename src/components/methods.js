@@ -9,6 +9,9 @@ function Student_verification(){
     const navigate = useNavigate();
     const auth_studentID = localStorage.getItem("auth_studentID");
     const auth_password = localStorage.getItem("auth_password");
+    if(auth_studentID=="" || auth_studentID==null){
+        navigate("/student/login");
+    }
     //console.log(auth_password, auth_studentID)
     var md5 = require('md5');
     let toast = require('./toast.js');

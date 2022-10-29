@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import LoadPDF from './LoadPDF.js';
-import { IFrame } from './iframe'
 
 export default function ReadBook() {
     const {bookID} = useParams();

@@ -45,8 +45,12 @@ export default function BookList() {
         <div className='container'>
             <center>
                 <h1>Book List</h1>
+                <font size="5">({booklist.length} Books)</font>
             </center>
-            {booklist}
+            {
+                booklist.length? booklist : 
+                <h2><br/><br/><center>Nothing in your Booklist</center></h2>
+            }
         </div>
     )
 }

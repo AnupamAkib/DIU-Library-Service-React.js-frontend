@@ -12,6 +12,9 @@ import {
 import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import DrawerComp from "./Drawer";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+
 const Header = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState();
@@ -19,9 +22,22 @@ const Header = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
   let toast = require(".././toast.js");
+  const methods = require('.././methods.js');
+  const api = methods.API();
 
-
-
+  useEffect(() => { //ping backend server in every 15 seconds
+    const interval = setInterval(function() {
+      axios.get(api+'/test', {
+          //parameters
+      })
+          .then((response) => {
+              //console.log(response.data)
+          }, (error) => {
+              console.log(error);
+      });
+    }, 15000);
+  }, [])
+  
 
 
 
@@ -72,9 +88,12 @@ const Header = () => {
 
               {
                 localStorage.getItem("auth_studentID")?
-                <Button onClick={()=>{localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} sx={{ marginLeft: "auto" }} variant="contained">
+                <>
+                <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_studentName")} ({localStorage.getItem("auth_studentID")})</Button>
+                <Button onClick={()=>{localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} sx={{ marginLeft: "10px" }} variant="contained">
                   Logout
                 </Button>
+                </>
                 :
                 <>
                   <Button onClick={()=>navigate("/student/login")} sx={{ marginLeft: "auto" }} variant="contained">

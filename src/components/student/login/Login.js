@@ -23,6 +23,8 @@ export default function Login() {
     const [errorMsg_Password, setErrorMsg_Password] = useState("");
     const [errorMsg_ID, setErrorMsg_ID] = useState("");
 
+    const [btnLoading, setBtnLoading] = useState(false)
+
     useEffect(() => {
         //console.log(studentID);
         if(studentID.length){
@@ -82,7 +84,7 @@ export default function Login() {
         e.preventDefault();
         //console.log("here")
         //console.log({studentID, password})
-        
+        setBtnLoading(true);
         axios.post(api+'/student/individualStudentInfo', {
             //parameters
             studentID : studentID
@@ -92,18 +94,24 @@ export default function Login() {
                     if(response.data.result[0].password==password){
                         toast.msg("Login successful", "green", 3000);
                         localStorage.setItem("auth_studentID", studentID);
+                        localStorage.setItem("auth_studentName", response.data.result[0].studentName);
+                        localStorage.setItem("auth_studentDept", response.data.result[0].programName);
                         localStorage.setItem("auth_password", md5(password));
+                        setBtnLoading(false);
                         navigate("/student");
                     }
                     else{
                         toast.msg("Wrong Student ID or Password", "red", 3000);
+                        setBtnLoading(false);
                     }
                 }
                 else{
                     toast.msg("Wrong Student ID or Password", "red", 3000);
+                    setBtnLoading(false);
                 }
             }, (error) => {
                 console.log(error);
+                setBtnLoading(false);
         });
     }
 
@@ -112,9 +120,9 @@ export default function Login() {
             <div className='inputContainer'>
                 <h1 align='center'>Student Login</h1>
                 <form onSubmit={checkLogin}>
-                    <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} id="filled-basic" label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
-                    <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="filled-basic" label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Password==""? false : true} helperText={errorMsg_Password} required/><br/>
-                    <Button type="submit" variant="contained" fullWidth disabled={(errorMsg_ID=="" && studentID.length && errorMsg_Password=="" && password.length)? false : true}>Login</Button>
+                    <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
+                    <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Password==""? false : true} helperText={errorMsg_Password} required/><br/>
+                    <Button type="submit" variant="contained" fullWidth disabled={(errorMsg_ID=="" && studentID.length && errorMsg_Password=="" && password.length)? btnLoading? true : false : true}>Login</Button>
                 </form>
 
                 <center><div style={{padding:"8px"}}>OR</div></center>

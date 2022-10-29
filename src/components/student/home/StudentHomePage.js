@@ -45,6 +45,11 @@ export default function StudentHomePage() {
     }
     return (
         <div className='container'>
+            <center>
+                <h1>All Books</h1>
+                <input type="search" style={{outline:"none", width:"90%", padding:"12px", fontSize:"large"}} placeholder="Search book, author, tags"/>
+            </center>
+            <br/>
             {bookCards}
         </div>
     )

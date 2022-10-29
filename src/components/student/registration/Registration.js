@@ -21,6 +21,8 @@ export default function Registration() {
     const [idEmailProvided, setIdEmailProvided] = useState(false);
     const [nextBtnLoading, setNextBtnLoading] = useState(false);
 
+    const [viewError, setviewError] = useState("");
+
     useEffect(() => {
         if(localStorage.getItem("auth_studentID")){
             navigate("/student/")
@@ -155,6 +157,7 @@ export default function Registration() {
                                         toast.msg("OTP send to your email. Please check", "", 4000);
                                     }, (error) => {
                                         console.log(error);
+                                        setviewError(error);
                                 });
 
                                 //setIdEmailProvided(true);
@@ -181,13 +184,14 @@ export default function Registration() {
                 :
                     <>
                     <form onSubmit={initialFormSubmit}>
-                        <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} id="filled-basic" label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
-                        <TextField value={studentEmail} onChange={(e)=>setStudentEmail(e.target.value)} id="filled-basic" label="Enter DIU Email" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Email==""? false : true} helperText={errorMsg_Email} required/><br/>
+                        <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
+                        <TextField value={studentEmail} onChange={(e)=>setStudentEmail(e.target.value)} label="Enter DIU Email" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Email==""? false : true} helperText={errorMsg_Email} required/><br/>
                         <Button type="submit" variant="contained" fullWidth disabled={(studentID.length && studentEmail.length && errorMsg_ID=="" && errorMsg_Email=="")?  nextBtnLoading? true : false : true}>NEXT</Button>
                     </form><br/>
                     <Button size="small" onClick={()=>navigate("/student/login")} variant="text" fullWidth>Already registered? login here</Button>
                     </>
                 }
+                <br/>{viewError}
             </div>
         </div>
     )

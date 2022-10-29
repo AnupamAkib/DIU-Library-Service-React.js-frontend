@@ -7,10 +7,14 @@ import { Button, CardActionArea } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from "react-router-dom"
 import axios from 'axios';
+import { useState } from 'react';
 
 export default function ListCard(props) {
     let toast = require('../../toast.js');
     let navigate = useNavigate();
+
+    const [Display, setDisplay] = useState("S");
+
     const ID = props.ID;
     const title = props.title;
     const description = props.description;
@@ -20,6 +24,7 @@ export default function ListCard(props) {
     const tags = props.tags;
     const addedDate = props.addedDate;
     let cropedTitle="";
+
     for(let i=0; i<title.length; i++){
         cropedTitle += title[i];
         if(i===20){
@@ -43,20 +48,21 @@ export default function ListCard(props) {
     const methods = require('../../methods.js');
     const api = methods.API();
     const removeFromList = () =>{
+        setDisplay("none");
         axios.post(api+'/student/removeFromBookList', {
             //parameters
             bookID : ID,
             studentID : "191-35-2640" 
         })
             .then((response) => {
-                toast.msg("removed from booklist", "red", 2500);
+                toast.msg("Removed from booklist", "red", 2500);
             }, (error) => {
                 console.log(error);
             });
     }
 
     return (
-        <div className='bookView' title={title}>
+        <div className='bookView' title={title} style={{display:Display}}>
             <font className="bookList_cross" onClick={()=>removeFromList()}>
                 <i class="fa fa-close"></i>
             </font>

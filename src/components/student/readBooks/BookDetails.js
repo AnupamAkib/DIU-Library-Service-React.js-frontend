@@ -92,7 +92,7 @@ export default function BookDetails() {
             studentID : localStorage.getItem("auth_studentID") 
         })
             .then((response) => {
-                toast.msg("saved in booklist", "green", 2500);
+                toast.msg("Saved in your booklist", "green", 2500);
                 setBookListFlag(true);
                 setBookListBtnLoading(false);
             }, (error) => {
@@ -108,7 +108,7 @@ export default function BookDetails() {
             studentID : localStorage.getItem("auth_studentID") 
         })
             .then((response) => {
-                toast.msg("removed from booklist", "red", 2500);
+                toast.msg("Removed from booklist", "red", 2500);
                 setBookListFlag(false);
                 setBookListBtnLoading(false);
             }, (error) => {
@@ -128,7 +128,8 @@ export default function BookDetails() {
                 width:"100%", 
                 height:"50vh",
                 backgroundRepeat:"no-repeat",
-                backgroundSize: 'cover'
+                backgroundSize: 'cover',
+                marginTop:"-20px"
             }}>
             </div>
 

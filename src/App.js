@@ -7,6 +7,8 @@ import ReadBook from './components/student/readBooks/ReadBook';
 import BookList from './components/student/booklists/BookList';
 import Registration from './components/student/registration/Registration';
 import Login from './components/student/login/Login';
+import ChangePass from './components/student/ChangePass';
+import PassRecovery from './components/student/PassRecovery';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path='/student/booklist' element={<BookList />} />
         <Route path='/student/registration' element={<Registration />} />
         <Route path='/student/login' element={<Login />} />
+        <Route path='/student/change_password' element={<ChangePass />} />
+        <Route path='/student/password_recovery' element={<PassRecovery />} />
       </Routes>
     </BrowserRouter>
   );
