@@ -184,17 +184,21 @@ export default function Registration() {
         e.preventDefault();
 
         try{
-            const res = await fetch(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`,
+            let diuAPI = `http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`;
+            const res = await fetch(diuAPI,
                 {
                     method: "GET",
                     headers: {
-                        "Content-Type": "application/json"
+                        'Accept': 'application/json',
+                        "Content-Type": "application/json;charset=UTF-8",
+                        body: JSON.stringify({})
                     }
                 }
             );
             const data = await res.json();
             console.log(data);
             alert(JSON.stringify(data))
+            alert(diuAPI)
         }catch(err){
             alert(err);
         }
