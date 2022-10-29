@@ -170,10 +170,12 @@ export default function Registration() {
                             }
                         }, (error) => {
                             console.log(error);
+                            alert("error from diu api")
                         });
                 }
             }, (error) => {
                 console.log(error);
+                alert("error from individual student api")
             });
     }
 
