@@ -201,6 +201,7 @@ export default function Registration() {
             alert(diuAPI)
         }catch(err){
             alert(err);
+            alert(diuAPI)
         }
 
     }
