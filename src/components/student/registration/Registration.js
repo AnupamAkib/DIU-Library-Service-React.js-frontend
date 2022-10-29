@@ -181,10 +181,11 @@ export default function Registration() {
 
 
     const initialFormSubmit_v2 = async (e) =>{
+        ///*  /index.html  200
+
         e.preventDefault();
-        let diuAPI = `/api/result/studentInfo?studentId=${studentID}`;
         try{
-            const res = await fetch(diuAPI,
+            const res = await fetch(`/api/studentInfo?studentId=191-35-2640`,
                 {
                     method: "GET",
                     headers: {
@@ -196,13 +197,10 @@ export default function Registration() {
             );
             const data = await res.json();
             console.log(data);
-            alert(JSON.stringify(data))
-            alert(diuAPI)
+            //alert(JSON.stringify(data))
         }catch(err){
-            alert(err);
-            alert(diuAPI)
+            console.log(err);
         }
-
     }
 
 
