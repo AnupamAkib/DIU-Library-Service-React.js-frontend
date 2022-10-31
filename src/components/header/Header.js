@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
+
 const Header = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState();
@@ -44,9 +45,10 @@ const Header = () => {
 
   // EDIT HERE IF PAGES NEED TO ADD
 
-    const pages = [{ text:"Home", href:"/student" }];
+    const pages = [];
 
     if(localStorage.getItem("auth_studentID")){ //student logged in view
+        pages.push({ text:"Home", href:"/student" })
         pages.push({ text:"My Book List", href:"/student/booklist" })
         pages.push({ text:"Change Password", href:"/student/change_password" })
     }

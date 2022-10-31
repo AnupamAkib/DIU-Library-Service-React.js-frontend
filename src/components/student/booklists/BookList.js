@@ -2,14 +2,25 @@ import React from 'react'
 import ListCard from './ListCard'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import Loading from '../../Loading'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function BookList() {
+    const navigate = useNavigate();
     const [bookListDetails, setBookListDetails] = useState([])
     const [_id, set_id] = useState(localStorage.getItem("auth_studentID"));
+    const [loading, setloading] = useState(true)
     
     const methods = require('../../methods.js');
+    let toast = require('../../toast.js');
+
     methods.Student_verification();
+    useEffect(()=>{
+        if(localStorage.getItem("auth_studentID")=="" || localStorage.getItem("auth_studentID")==null){
+            navigate("/student/login");
+        }
+    })
 
     const api = methods.API();
     useEffect(() => {
@@ -20,8 +31,9 @@ export default function BookList() {
             })
                 .then((response) => {
                     setBookListDetails(response.data.result)
+                    setloading(false);
                 }, (error) => {
-                    console.log(error);
+                    console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                 });
         }
     }, [])
@@ -40,6 +52,10 @@ export default function BookList() {
               description={bookListDetails[i].description}
             />
         );
+    }
+
+    if(loading){
+        return <Loading/>
     }
     return (
         <div className='container'>

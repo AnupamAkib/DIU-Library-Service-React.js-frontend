@@ -9,9 +9,16 @@ export default function StudentHomePage() {
   const navigate = useNavigate();
     const [allBooks, setAllBooks] = useState([]);
     const methods = require('../../methods.js');
+    let toast = require('../../toast.js');
     const api = methods.API();
-
+    
     methods.Student_verification();
+
+    useEffect(()=>{
+        if(localStorage.getItem("auth_studentID")=="" || localStorage.getItem("auth_studentID")==null){
+            navigate("/student/login");
+        }
+    })
     
     const [dataLoading, setDataLoading] = useState(true);
 
@@ -25,7 +32,7 @@ export default function StudentHomePage() {
                 setAllBooks(response.data.result);
                 setDataLoading(false);
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
     }, [])
 

@@ -31,57 +31,61 @@ export default function NextPhase(props) {
         e.preventDefault();
         //console.log("clear to register");
         setRegistrationBtnLoading(true);
-        axios.post(api+'/student/registration', {
-            //parameters
-            studentID : id,
-            studentName : name,
-            DIUEmail : email,
-            department : department,
-            programName : degree,
-            batch : batch,
-            password : password,
-            savedBooks : [] 
-        })
-            .then((response) => {
-                toast.msg("Registration successful", "green", 3000);
-                localStorage.setItem("auth_studentID", id);
-                localStorage.setItem("auth_studentName", name);
-                localStorage.setItem("auth_password", md5(password));
-                localStorage.setItem("auth_studentDept", degree);
-                axios.post(api+'/system/send_mail', {
-                    //parameters
-                    sendTo: email,
-                    subject: "Welcome to DIU Library Service",
-                    emailBody: `
-                    <div style="background:#09509e; color:#fff; border:10px solid #39b24a;">
-                    <div style="background:#fff; padding:15px"><center><img src="https://library.daffodilvarsity.edu.bd/template/images/library_logo.png" width="280px"/></center></div>
-                    <div style="padding:15px; font-size:large" align="justify">
-                        Dear <b>${name}</b>, <br/>
-                        Welcome to DIU Library Service. Your registration is successful. Search a book you want from our library, read it immediately or save it in your booklist for reading it later.<br/>
-                        Happy Reading, Learning & Sharing!
-                        <br/><br/>
-                        Thanks,<br/>
-                        DIU Library Service Team
-                        <br/><hr/>
-                        <font size="2">
-                            For any kind of query, please contact with <a style="color:#fff" href="mailto:mirakib25@gmail.com">Mir Anupam Hossain Akib</a>
-                        </font>
-                    </div>
-                </div>`
-                })
-                    .then((response) => {
-                        
-                    }, (error) => {
-                        console.log(error);
-                });
-                
-                setRegistrationBtnLoading(false);
-                navigate("/student");
-            }, (error) => {
-                console.log(error);
-                setRegistrationBtnLoading(false);
-        });
-
+        if(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length && generated_otp == OTP && password==rePassword){
+            axios.post(api+'/student/registration', {
+                //parameters
+                studentID : id,
+                studentName : name,
+                DIUEmail : email,
+                department : department,
+                programName : degree,
+                batch : batch,
+                password : password,
+                savedBooks : [] 
+            })
+                .then((response) => {
+                    toast.msg("Registration successful", "green", 3000);
+                    localStorage.setItem("auth_studentID", id);
+                    localStorage.setItem("auth_studentName", name);
+                    localStorage.setItem("auth_password", md5(password));
+                    localStorage.setItem("auth_studentDept", degree);
+                    axios.post(api+'/system/send_mail', {
+                        //parameters
+                        sendTo: email,
+                        subject: "Welcome to DIU Library Service",
+                        emailBody: `
+                        <div style="background:#09509e; color:#fff; border:10px solid #39b24a;">
+                        <div style="background:#fff; padding:15px"><center><img src="https://library.daffodilvarsity.edu.bd/template/images/library_logo.png" width="280px"/></center></div>
+                        <div style="padding:15px; font-size:large" align="justify">
+                            Dear <b>${name}</b>, <br/>
+                            Welcome to DIU Library Service. Your registration is successful. Search a book you want from our library, read it immediately or save it in your booklist for reading it later.<br/>
+                            Happy Reading, Learning & Sharing!
+                            <br/><br/>
+                            Thanks,<br/>
+                            DIU Library Service Team
+                            <br/><hr/>
+                            <font size="2">
+                                For any kind of query, please contact with <a style="color:#fff" href="mailto:mirakib25@gmail.com">Mir Anupam Hossain Akib</a>
+                            </font>
+                        </div>
+                    </div>`
+                    })
+                        .then((response) => {
+                            
+                        }, (error) => {
+                            console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
+                    });
+                    
+                    setRegistrationBtnLoading(false);
+                    navigate("/student");
+                }, (error) => {
+                    console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
+                    setRegistrationBtnLoading(false);
+            });
+        }
+        else{
+            toast.msg("Sorry, something went wrong", "", 3000);
+        }
     }
     //console.log(generated_otp)
     useEffect(() => {

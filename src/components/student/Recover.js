@@ -87,19 +87,24 @@ export default function Recover(props) {
         setBtnLoading(true);
         //console.log(studentID)
         //console.log(password)
-        axios.post(api+'/student/changePassword', {
-            //parameters
-            studentID : studentID,
-            newPassword : password
-        })
-            .then((response) => {
-                toast.msg("Password changed, please login", "green", 3000);
-                setBtnLoading(false);
-                navigate("/student/login");
-            }, (error) => {
-                console.log(error);
-                setBtnLoading(false);
-        });
+        if(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length){
+            axios.post(api+'/student/changePassword', {
+                //parameters
+                studentID : studentID,
+                newPassword : password
+            })
+                .then((response) => {
+                    toast.msg("Password changed, please login", "green", 3000);
+                    setBtnLoading(false);
+                    navigate("/student/login");
+                }, (error) => {
+                    console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
+                    setBtnLoading(false);
+            });
+        }
+        else{
+            toast.msg("Sorry, something went wrong", "", 3000);
+        }
     }
 
     return (
@@ -108,9 +113,9 @@ export default function Recover(props) {
             <form onSubmit={recoverPass}>
                 <TextField onInput = {(e) =>{
                         e.target.value = Math.max(0, parseInt(e.target.value) ).toString().slice(0,6)
-                    }} type="number" value={OTP} onChange={(e)=>setOTP(e.target.value)} id="filled-basic" label="Enter OTP" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_OTP==""? false : true} helperText={errorMsg_OTP} required/><br/>
-                <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="filled-basic" label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass_init==""? false : true} helperText={errorMsg_Pass_init} required/><br/>
-                <TextField type="password" value={rePassword} onChange={(e)=>setRePassword(e.target.value)} id="filled-basic" label="Re-enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass==""? false : true} helperText={errorMsg_Pass} required/><br/>
+                    }} type="number" value={OTP} onChange={(e)=>setOTP(e.target.value)} label="Enter OTP" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_OTP==""? false : true} helperText={errorMsg_OTP} required/><br/>
+                <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass_init==""? false : true} helperText={errorMsg_Pass_init} required/><br/>
+                <TextField type="password" value={rePassword} onChange={(e)=>setRePassword(e.target.value)} label="Re-enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass==""? false : true} helperText={errorMsg_Pass} required/><br/>
                 
                 <Button disabled={(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length)? btnLoading? true : false : true} type="submit" variant="contained" fullWidth>Change Password</Button>
             </form>

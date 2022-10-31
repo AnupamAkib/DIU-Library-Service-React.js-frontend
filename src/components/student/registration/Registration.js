@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Registration() {
     const navigate = useNavigate();
-    const [studentID, setStudentID] = useState("191-35-2640");
-    const [studentEmail, setStudentEmail] = useState("anupam35-2640@diu.edu.bd");
+    const [studentID, setStudentID] = useState("");
+    const [studentEmail, setStudentEmail] = useState("");
     const [studentName, setStudentName] = useState("");
     const [department, setDepartment] = useState("");
     const [degreeName, setDegreeName] = useState("");
@@ -155,7 +155,7 @@ export default function Registration() {
                                         setNextBtnLoading(false);
                                         toast.msg("OTP is sent to your email. Please check", "", 4000);
                                     }, (error) => {
-                                        console.log(error);
+                                        console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                                 });
                                 
                             }
@@ -164,11 +164,11 @@ export default function Registration() {
                                 setNextBtnLoading(false);
                             }
                         }, (error) => {
-                            console.log(error);
+                            console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                         });
                 }
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
     }
 

@@ -9,12 +9,15 @@ import Registration from './components/student/registration/Registration';
 import Login from './components/student/login/Login';
 import ChangePass from './components/student/ChangePass';
 import PassRecovery from './components/student/PassRecovery';
+import AllLockerInfo from './components/security/AllLockerInfo';
+import Home from './components/Home';
 
 function App() {
   return (
     <BrowserRouter>
     <Header/>
       <Routes>
+        <Route path='/' element={<Home />} />
         <Route path='/student/' element={<StudentHomePage />} />
         <Route path='/book/details/:bookID' element={<BookDetails />} />
         <Route path='/book/read/:bookID' element={<ReadBook />} />
@@ -23,6 +26,10 @@ function App() {
         <Route path='/student/login' element={<Login />} />
         <Route path='/student/change_password' element={<ChangePass />} />
         <Route path='/student/password_recovery' element={<PassRecovery />} />
+
+
+        <Route path='/guards/all_distributed_key' element={<AllLockerInfo />} />
+
       </Routes>
     </BrowserRouter>
   );

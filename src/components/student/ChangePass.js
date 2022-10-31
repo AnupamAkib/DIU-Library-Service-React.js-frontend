@@ -24,20 +24,25 @@ export default function ChangePass() {
     const changePass = (e) =>{
         e.preventDefault();
         setBtnLoading(true);
-        axios.post(api+'/student/changePassword', {
-            //parameters
-            studentID : localStorage.getItem("auth_studentID"),
-            newPassword : newPass
-        })
-            .then((response) => {
-                toast.msg("Password changed successfully", "green", 3000);
-                localStorage.setItem("auth_password", md5(newPass));
-                setBtnLoading(false);
-                navigate("/student/");
-            }, (error) => {
-                console.log(error);
-                setBtnLoading(false);
-        });
+        if(errorMsg_curPass=="" && curPass.length && errorMsg_newPass=="" && newPass.length && errorMsg_newPassAgain=="" && newPassAgain.length){
+            axios.post(api+'/student/changePassword', {
+                //parameters
+                studentID : localStorage.getItem("auth_studentID"),
+                newPassword : newPass
+            })
+                .then((response) => {
+                    toast.msg("Password changed successfully", "green", 3000);
+                    localStorage.setItem("auth_password", md5(newPass));
+                    setBtnLoading(false);
+                    navigate("/student/");
+                }, (error) => {
+                    console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
+                    setBtnLoading(false);
+            });
+        }
+        else{
+            toast.msg("Sorry, something went wrong", "", 3000);
+        }
     }
 
     let md5 = require('md5');

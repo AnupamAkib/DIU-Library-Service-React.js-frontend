@@ -7,6 +7,13 @@ import Loading from '../../Loading.js';
 
 export default function BookDetails() {
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(localStorage.getItem("auth_studentID")=="" || localStorage.getItem("auth_studentID")==null){
+            navigate("/student/login");
+        }
+    })
+
     const { bookID } = useParams();
     const [loading, setLoading] = useState(localStorage.getItem("ID")==""?true:false);
 
@@ -73,11 +80,11 @@ export default function BookDetails() {
                             }
                             setBookListBtnLoading(false);
                         }, (error) => {
-                            console.log(error);
+                            console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                         });
                 }
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
       }, [])
     
@@ -97,7 +104,7 @@ export default function BookDetails() {
                 setBookListFlag(true);
                 setBookListBtnLoading(false);
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
     }
 
@@ -113,7 +120,7 @@ export default function BookDetails() {
                 setBookListFlag(false);
                 setBookListBtnLoading(false);
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
     }
     

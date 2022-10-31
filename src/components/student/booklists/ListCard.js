@@ -57,7 +57,7 @@ export default function ListCard(props) {
             .then((response) => {
                 toast.msg("Book removed from booklist", "red", 2500);
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
         
     }

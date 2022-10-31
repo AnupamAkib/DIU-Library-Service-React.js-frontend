@@ -62,7 +62,7 @@ export default function PassRecovery() {
                             setBtnLoading(false);
                             toast.msg("OTP is sent to your email. Please check", "", 4000);
                         }, (error) => {
-                            console.log(error);
+                            console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                             setBtnLoading(false);
                     });
                     //setOTPSend(true);
@@ -74,7 +74,7 @@ export default function PassRecovery() {
                     setBtnLoading(false);
                 }
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
     }
 

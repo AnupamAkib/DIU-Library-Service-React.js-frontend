@@ -110,7 +110,7 @@ export default function Login() {
                     setBtnLoading(false);
                 }
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                 setBtnLoading(false);
         });
     }

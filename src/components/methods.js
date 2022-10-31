@@ -11,7 +11,7 @@ function Student_verification(){
     const auth_password = localStorage.getItem("auth_password");
     if(auth_studentID=="" || auth_studentID==null){
         navigate("/student/login");
-    }
+    } 
     //console.log(auth_password, auth_studentID)
     var md5 = require('md5');
     let toast = require('./toast.js');
@@ -72,4 +72,38 @@ function API(){
     return api_link;
 }
 
-export {API, getRandomOTP, Student_verification};
+function getTime(){
+    const date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+}
+
+function getDate(){
+    const d = new Date();
+    let day = d.getDate();
+    if(day < 10) day = "0"+day;
+    let month = d.getMonth();
+    let year = d.getFullYear();
+    return day+" "+getMonthName(month)+" "+year;
+}
+
+function getMonthName(n){
+    const months = [
+        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+    ]
+    return months[n];
+}
+
+function getTimeMilliseconds(){
+    const d = new Date();
+    let time = d.getTime();
+    return time.toString();
+}
+
+export {API, getRandomOTP, Student_verification, getDate, getMonthName, getTime, getTimeMilliseconds};

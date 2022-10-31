@@ -3,16 +3,25 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios';
 import LoadPDF from './LoadPDF.js';
 import Loading from '../../Loading.js';
+import { useNavigate } from 'react-router-dom';
 
 export default function ReadBook() {
+    const navigate = useNavigate();
     const {bookID} = useParams();
     const [bookDetails, setBookDetails] = useState({});
     const [loading, setLoading] = useState(true)
 
     const methods = require('../../methods.js');
     methods.Student_verification();
+    useEffect(()=>{
+        if(localStorage.getItem("auth_studentID")=="" || localStorage.getItem("auth_studentID")==null){
+            navigate("/student/login");
+        }
+    })
 
     const api = methods.API();
+    let toast = require('../../toast.js');
+
     useEffect(() => {
         axios.post(api+'/library/searchIndividualBook', {
             //parameters
@@ -22,7 +31,7 @@ export default function ReadBook() {
                 setBookDetails(response.data.result[0]);
                 setLoading(false);
             }, (error) => {
-                console.log(error);
+                console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
     }, [])
     //<iframe src={bookDetails.book_link} width="100%" height="700"></iframe>
