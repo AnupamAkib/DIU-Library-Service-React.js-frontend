@@ -204,6 +204,7 @@ export default function AllLockerInfo() {
                     }, (error) => {
                         console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
                 });
+                break;
             }
         }
         if(!flag){
