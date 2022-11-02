@@ -9,7 +9,7 @@ export default function Home() {
             <center>
                 <h2>Select your role</h2><br/>
                 <Button onClick={()=>navigate("/student/login")}>Student</Button><br/>
-                <Button onClick={()=>navigate("/guards/all_distributed_key")}>Security Guard</Button><br/>
+                <Button onClick={()=>navigate("/guards/login")}>Security Guard</Button><br/>
                 <Button onClick={()=>navigate("/admin/")}>Admin/Authority</Button><br/>
             </center>
         </div>

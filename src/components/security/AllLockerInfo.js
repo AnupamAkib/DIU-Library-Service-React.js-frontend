@@ -12,6 +12,7 @@ import Loading from '../Loading.js';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -26,7 +27,7 @@ const style = {
 };
 
 export default function AllLockerInfo() {
-
+    const navigate = useNavigate();
     const [studentID, setStudentID] = useState("");
     const [errorMsg_ID, setErrorMsg_ID] = useState("");
     const [keyNumber, setKeyNumber] = useState("");
@@ -36,6 +37,14 @@ export default function AllLockerInfo() {
 
     const [open, setOpen] = useState(false);
     const [open_mark, setOpen_mark] = useState(false);
+
+    useEffect(() => {
+        if(localStorage.getItem("auth_guardID")=="" || localStorage.getItem("auth_guardID")==null){
+            navigate("/guards/login");
+        }
+    }, [])
+    
+
     const handleOpen = () => {
         setStudentID("");
         setKeyNumber("");
@@ -212,13 +221,17 @@ export default function AllLockerInfo() {
         }
     }
 
-    if(dataLoading){
-        return <Loading/>
-    }
+    
+
+  if(dataLoading){
+    return <Loading/>
+  }
 
     return (
         <div className='container'>
-            <h1 align='center'>Locker Key All History</h1>
+            <h1 align='center'>Locker Key History</h1>
+
+
             {allLockerInfo.length? 
             <ViewTable data = {allLockerInfo}/>
              : ""}

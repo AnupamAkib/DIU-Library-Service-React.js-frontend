@@ -97,6 +97,14 @@ const Header = () => {
                 </Button>
                 </>
                 :
+                localStorage.getItem("auth_guardID")?
+                <>
+                <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_guardName")}</Button>
+                <Button onClick={()=>{localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                  Logout
+                </Button>
+                </>
+                :
                 <>
                   <Button onClick={()=>navigate("/student/login")} sx={{ marginLeft: "auto" }} variant="contained">
                   Login

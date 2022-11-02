@@ -9,8 +9,9 @@ import Registration from './components/student/registration/Registration';
 import Login from './components/student/login/Login';
 import ChangePass from './components/student/ChangePass';
 import PassRecovery from './components/student/PassRecovery';
-import AllLockerInfo from './components/security/AllLockerInfo';
 import Home from './components/Home';
+import AllLockerInfo from './components/security/AllLockerInfo';
+import SecurityLogin from './components/security/SecurityLogin';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
 
 
         <Route path='/guards/all_distributed_key' element={<AllLockerInfo />} />
+        <Route path='/guards/login' element={<SecurityLogin />} />
 
       </Routes>
     </BrowserRouter>

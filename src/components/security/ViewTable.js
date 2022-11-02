@@ -8,9 +8,15 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useState, useEffect } from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Loading from '../Loading.js';
+
 
 const columns = [
-  { id: 'studentID', label: 'StudentID', minWidth: 140, align: 'center' },
+  { id: 'studentID', label: 'Student ID', minWidth: 140, align: 'center' },
   { id: 'keyNumber', label: 'Key Number', minWidth: 120, align: 'center' },
   {
     id: 'handoverTime',
@@ -22,14 +28,14 @@ const columns = [
   {
     id: 'returnTime',
     label: 'Return Time',
-    minWidth: 130,
+    minWidth: 140,
     align: 'center',
     format: (value) => value.toLocaleString('en-US'),
   },
   {
     id: 'duration',
     label: 'Duration',
-    minWidth: 150,
+    minWidth: 140,
     align: 'center',
     format: (value) => value.toFixed(2),
   },
@@ -38,11 +44,39 @@ const columns = [
 
 export default function ViewTable(props) {
   const [rows, setRows] = useState([])
+  const methods = require('../methods.js');
+  const [selectHistory, setSelectHistory] = useState('today');
+
   useEffect(() => {
-    setRows(props.data);
-    //console.log(props.data)
-  }, [])
+    if(selectHistory=="all"){
+      setRows(props.data);
+    }
+    else if(selectHistory=="today"){
+      let data = props.data;
+      let tmp = [];
+      for(let i=0; i<data.length; i++){
+        let s = data[i].handoverTime;
+        s = s.split(", ");
+        let todaysDate = methods.getDate();
+        if(todaysDate == s[0]){
+          tmp.push(data[i]);
+        }
+      }
+      setRows(tmp);
+    }
+    else if(selectHistory == "not returned"){
+      let data = props.data;
+      let tmp = [];
+      for(let i=0; i<data.length; i++){
+        if(data[i].duration == "-"){
+          tmp.push(data[i]);
+        }
+      }
+      setRows(tmp);
+    }
+  }, [selectHistory])
   
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -55,7 +89,30 @@ export default function ViewTable(props) {
     setPage(0);
   };
 
+
   return (
+    <div>
+
+
+      <center>
+            <div className="col-4" style={{marginLeft:"-16px"}}>
+                <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }} fullWidth>
+                    <InputLabel id="demo-simple-select-filled-label">Select one</InputLabel>
+                    <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={selectHistory}
+                    onChange={(e)=>setSelectHistory(e.target.value)}
+                    >
+                    <MenuItem value={"today"}>Today's History</MenuItem>
+                    <MenuItem value={"not returned"}>On Service Keys</MenuItem>
+                    <MenuItem value={"all"}>All History (Life Time)</MenuItem>
+                    </Select>
+                </FormControl>
+            </div>
+            </center>
+
+    {rows.length?
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
@@ -66,7 +123,7 @@ export default function ViewTable(props) {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-      <TableContainer sx={{ maxHeight:"78vh" }}>
+      <TableContainer sx={{ maxHeight:"71vh" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -105,5 +162,8 @@ export default function ViewTable(props) {
       </TableContainer>
       
     </Paper>
+    : 
+    <h1 align='center'>Nothing Found</h1>}
+    </div>
   );
 }

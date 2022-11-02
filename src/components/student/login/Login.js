@@ -7,6 +7,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        localStorage.setItem("auth_guardID", ""); //logout from guard role
         if(localStorage.getItem("auth_studentID")){
             navigate("/student/")
         }

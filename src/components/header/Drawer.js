@@ -33,12 +33,20 @@ const DrawerComp = (props) => {
         {
           localStorage.getItem("auth_studentID")?
           <div style={{padding:"18px"}}>
-            
             <b>{localStorage.getItem("auth_studentName")}</b>
             <br/>
             {localStorage.getItem("auth_studentID")}<br/>
             {localStorage.getItem("auth_studentDept")}
-          </div> : <></>
+          </div> : 
+          localStorage.getItem("auth_guardID")?
+          <div style={{padding:"18px"}}>
+            <b>{localStorage.getItem("auth_guardName")}</b>
+            <br/>
+            <b>EmpID:</b> {localStorage.getItem("auth_guardID")}<br/>
+          </div> : 
+          
+          
+          <></>
         }
         <List sx={{width:"220px"}} onClick={()=>setOpenDrawer(false)}>
           {pages.map((page, index) => (
@@ -54,6 +62,11 @@ const DrawerComp = (props) => {
           {
                 localStorage.getItem("auth_studentID")?
                 <Button onClick={()=>{setOpenDrawer(false); localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} variant="text">
+                  Logout
+                </Button>
+                :
+                localStorage.getItem("auth_guardID")?
+                <Button onClick={()=>{setOpenDrawer(false); localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} variant="text">
                   Logout
                 </Button>
                 :
