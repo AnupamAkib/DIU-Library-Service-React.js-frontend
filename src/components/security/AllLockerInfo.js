@@ -143,7 +143,7 @@ export default function AllLockerInfo() {
             if(allLockerInfo[i].studentID == studentID && allLockerInfo[i].duration == "-"){
                 keyNotReturned = true;
             }
-            if(allLockerInfo[i].keyNumber == keyNumber){
+            if(allLockerInfo[i].keyNumber == keyNumber && allLockerInfo[i].duration == "-"){
                 keyAlreadyDistributed = true;
             }
         }
