@@ -28,7 +28,7 @@ const DrawerComp = (props) => {
         onClose={() => setOpenDrawer(false)}
       >
         <br/>
-            <center><img src="/library_logo.png" width="150"/></center>
+            <center><img src="/library_logo.png" width="150" onClick={()=>{setOpenDrawer(false);navigate("/")}}/></center>
             <br/>
         {
           localStorage.getItem("auth_studentID")?
@@ -44,8 +44,6 @@ const DrawerComp = (props) => {
             <br/>
             <b>EmpID:</b> {localStorage.getItem("auth_guardID")}<br/>
           </div> : 
-          
-          
           <></>
         }
         <List sx={{width:"220px"}} onClick={()=>setOpenDrawer(false)}>

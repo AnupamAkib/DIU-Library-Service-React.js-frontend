@@ -163,7 +163,7 @@ export default function ViewTable(props) {
       
     </Paper>
     : 
-    <h1 align='center'>Nothing Found</h1>}
+    <h1 align='center'><br/><br/>Nothing Found</h1>}
     </div>
   );
 }

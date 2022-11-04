@@ -52,12 +52,10 @@ const Header = () => {
         pages.push({ text:"My Book List", href:"/student/booklist" })
         pages.push({ text:"Change Password", href:"/student/change_password" })
     }
-
-
-
-
-
-
+    else if(localStorage.getItem("auth_guardID")){ //student logged in view
+      pages.push({ text:"Locker Key Distribution", href:"/guards/login" })
+      pages.push({ text:"Search Student", href:"/guards/view_student_info" })
+  }
 
 
 
