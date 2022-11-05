@@ -63,6 +63,9 @@ export default function Login() {
     return (
         <div className='container col-4'>
             <div className='inputContainer'>
+                <center>
+                    <img src="/library_logo.png" width="200px"/><br/><br/>
+                </center>
                 <h1 align='center'>Security Guard Login</h1>
                 <center>
                     Please enter your Employee ID and Password to enter the system as a library security guard

@@ -62,7 +62,7 @@ const Header = () => {
 
   return (
     <React.Fragment>
-      <AppBar sx={{ background: "#063970" }}>
+      <AppBar sx={{ background: "#09509e" }}>
         <Toolbar>
           <font size="5">DIU Library Service</font>
           {isMatch ? (

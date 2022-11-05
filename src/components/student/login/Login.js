@@ -119,6 +119,9 @@ export default function Login() {
     return (
         <div className='container col-4'>
             <div className='inputContainer'>
+                <center>
+                    <img src="/library_logo.png" width="200px"/><br/><br/>
+                </center>
                 <h1 align='center'>Student Login</h1>
                 <form onSubmit={checkLogin}>
                     <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
