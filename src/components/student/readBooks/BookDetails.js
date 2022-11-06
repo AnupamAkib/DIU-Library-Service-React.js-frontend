@@ -143,21 +143,21 @@ export default function BookDetails() {
 
             <div className='container col-6'>
             <div className='detailsBook'>
-            <h1 style={{color:"darkblue"}}><b>{title}</b></h1>
+            <h1 style={{color:"darkblue"}} className="capitalize"><b>{title}</b></h1>
             Written by<br/>
-            <b><font size="4">{writer}</font></b><hr/>
+            <b><font size="4" className="capitalize">{writer}</font></b><hr/>
             <b>Book Description: </b>{description}<br/><br/>
             <b>Tags: </b>{tags}<br/>
             <b>Book Added: </b>{addedDate}<br/><br/>
 
-            <Button onClick={()=>navigate("/book/read/"+_id)} variant="contained" fullWidth>Read book</Button>
-            
-            {
-                bookListBtnLoading? <Button varient="contained" fullWidth disabled>Wait</Button> : 
-                bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"red", marginTop:"10px"}} variant="contained" fullWidth>REmove from book list</Button> : 
-                <Button onClick={()=> saveInBookList()} style={{background:"green", marginTop:"10px"}} variant="contained" fullWidth>save in my book list</Button>
-            }
-
+            <div className='container col-6'>
+                <Button onClick={()=>navigate("/book/read/"+_id)} variant="contained" fullWidth>Read book</Button>
+                {
+                    bookListBtnLoading? <Button varient="contained" fullWidth disabled>Wait</Button> : 
+                    bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"red", marginTop:"10px"}} variant="contained" fullWidth>REmove from book list</Button> : 
+                    <Button onClick={()=> saveInBookList()} style={{background:"green", marginTop:"10px"}} variant="contained" fullWidth>save in my book list</Button>
+                }
+            </div>
             </div>
             
             </div>

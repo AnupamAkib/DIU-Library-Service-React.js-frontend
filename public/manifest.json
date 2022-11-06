@@ -13,12 +13,12 @@
       "sizes": "192x192"
     },
     {
-      "src" : "diulogo.png",
+      "src" : "logo512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
-  "start_url": "./student/login",
+  "start_url": "./student",
   "display": "standalone",
   "theme_color": "#09509e",
   "background_color": "#ffffff"

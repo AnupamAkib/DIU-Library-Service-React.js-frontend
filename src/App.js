@@ -13,6 +13,8 @@ import Home from './components/Home';
 import AllLockerInfo from './components/security/AllLockerInfo';
 import SecurityLogin from './components/security/SecurityLogin';
 import ViewStudent from './components/security/ViewStudent';
+import AdminDashboard from './components/admin/Dashboard';
+import AddBook from './components/admin/add_book/AddBook';
 
 
 function App() {
@@ -34,6 +36,9 @@ function App() {
         <Route path='/guards/all_distributed_key' element={<AllLockerInfo />} />
         <Route path='/guards/login' element={<SecurityLogin />} />
         <Route path='/guards/view_student_info' element={<ViewStudent />} />
+
+        <Route path='/admin' element={<AdminDashboard />} />
+        <Route path='/admin/add_book' element={<AddBook />} />
 
       </Routes>
     </BrowserRouter>

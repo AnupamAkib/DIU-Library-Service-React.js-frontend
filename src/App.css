@@ -52,6 +52,26 @@
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
 }
 
+.selectBG{
+  padding:20px 10px 20px 10px;
+  background:#dadada;
+}
+.tmp{
+  padding:10px;
+}
+.book_adding_loading{
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background: rgba(0, 0, 0, 0.516);
+  z-index: 10;
+}
+.capitalize{
+  text-transform: capitalize;
+}
+
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */
   [class*="col-"] {
@@ -65,5 +85,8 @@
   }
   .bookListCard{
     height:240px;
+  }
+  .tmp{
+    padding:0px;
   }
 }
