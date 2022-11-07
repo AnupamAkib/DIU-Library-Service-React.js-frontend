@@ -47,8 +47,8 @@ export default function ReadBook() {
                     <tr>
                         <td><img src="/pdf_logo.png" width="60"/></td>
                         <td>
-                            <h2>{bookDetails.title}</h2>
-                            {bookDetails.writer}<br/>
+                            <h2 className="capitalize">{bookDetails.title}</h2>
+                            <font className="capitalize">{bookDetails.writer}</font><br/>
                         </td>
                     </tr>
                 </table>

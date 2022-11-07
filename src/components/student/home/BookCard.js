@@ -53,7 +53,7 @@ export default function BookCard(props) {
                 <Typography className="capitalize">
                     <font style={{fontWeight:"bold"}}>{cropedTitle}</font>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" className="capitalize">
                     {writer}
                 </Typography>
                 </CardContent>
