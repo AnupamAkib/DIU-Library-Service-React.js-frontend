@@ -154,7 +154,7 @@ export default function BookDetails() {
                 <Button onClick={()=>navigate("/book/read/"+_id)} variant="contained" fullWidth>Read book</Button>
                 {
                     bookListBtnLoading? <Button varient="contained" fullWidth disabled>Wait</Button> : 
-                    bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"red", marginTop:"10px"}} variant="contained" fullWidth>REmove from book list</Button> : 
+                    bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"gray", marginTop:"10px"}} variant="contained" fullWidth>REmove from book list</Button> : 
                     <Button onClick={()=> saveInBookList()} style={{background:"green", marginTop:"10px"}} variant="contained" fullWidth>save in my book list</Button>
                 }
             </div>

@@ -15,7 +15,8 @@ import SecurityLogin from './components/security/SecurityLogin';
 import ViewStudent from './components/security/ViewStudent';
 import AdminDashboard from './components/admin/Dashboard';
 import AddBook from './components/admin/add_book/AddBook';
-
+import EditBook from './components/admin/edit_book/EditBook';
+import SearchBook from './components/admin/search_book/SearchBook';
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
 
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/admin/add_book' element={<AddBook />} />
+        <Route path='/admin/search_book/:action' element={<SearchBook />} />
+        <Route path='/admin/edit_book/:bookID' element={<EditBook />} />
 
       </Routes>
     </BrowserRouter>

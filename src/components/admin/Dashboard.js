@@ -9,7 +9,7 @@ export default function Dashboard() {
               Click on the action that you want to perform. You have the access to perform the following actions.
             </div>
             <Card href="/admin/add_book" icon="fas fa-book-open">Add Book</Card>
-            <Card href="/admin/edit_book" icon="fas fa-edit">Edit Book</Card>
+            <Card href="/admin/search_book/edit" icon="fas fa-edit">Edit Book</Card>
             <Card href="/admin/delete_book" icon="far fa-trash-alt">Delete Book</Card>
             <Card href="/admin/manage_guards" icon="fas fa-user-shield">Manage Guards</Card>
             <Card href="/admin/view_statistics" icon="fa fa-line-chart">View Statistics</Card>

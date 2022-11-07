@@ -78,9 +78,9 @@ export default function ListCard(props) {
                 />
                 <CardContent>
                 <Typography>
-                    <font style={{fontWeight:"bold"}}>{cropedTitle}</font>
+                    <font style={{fontWeight:"bold"}} className="capitalize">{cropedTitle}</font>
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.secondary" className="capitalize">
                     {writer}
                 </Typography>
                 

@@ -71,6 +71,15 @@
 .capitalize{
   text-transform: capitalize;
 }
+.next_prev_btn{
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  width:100%;
+  padding:5px 0px 15px 0px;
+  background: white;
+  z-index: 5;
+}
 
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */
