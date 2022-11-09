@@ -11,13 +11,30 @@ import {
 } from "@mui/material";
 import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import DrawerComp from "./Drawer";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+    const [role, setRole] = useState("");
+    useEffect(() => {
+      let path = location.pathname;
+      path = path.split("/");
+      if(path[1]=="student" || path[1]=="book"){
+        setRole("student");
+      }
+      else if(path[1]=="guards"){
+        setRole("guards");
+      }
+      else if(path[1]=="admin"){
+        setRole("admin");
+      }
+      //console.log(role)
+    }, [location.pathname])
+
   const [value, setValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -47,24 +64,89 @@ const Header = () => {
 
     const pages = [];
 
-    if(localStorage.getItem("auth_studentID")){ //student logged in view
+    
+    if(role=="student"){
+      if(localStorage.getItem("auth_studentID")){
         pages.push({ text:"Home", href:"/student" })
         pages.push({ text:"My Book List", href:"/student/booklist" })
         pages.push({ text:"Change Password", href:"/student/change_password" })
+      }
+      else{
+        pages.push({ text:"Login", href:"/student/login" })
+        pages.push({ text:"Registration", href:"/student/registration" })
+        pages.push({ text:"Retrieve Password", href:"/student/password_recovery" })
+      }
     }
-    else if(localStorage.getItem("auth_guardID")){ //student logged in view
-      pages.push({ text:"Locker Key Distribution", href:"/guards/login" })
-      pages.push({ text:"Search Student", href:"/guards/view_student_info" })
-  }
+    else if(role=="guards"){
+      if(localStorage.getItem("auth_guardID")){
+        pages.push({ text:"All Distributed Key", href:"/guards/all_distributed_key" })
+        pages.push({ text:"Search Student", href:"/guards/view_student_info" })
+      }
+      else{
+        pages.push({ text:"Login", href:"/guards/login" })
+      }
+    }
+    else if(role=="admin"){ //get admin access from localstorage data
+      pages.push({ text:"Dashboard", href:"/admin" })
+      pages.push({ text:"Add Book", href:"/admin/add_book" })
+      pages.push({ text:"Edit Book", href:"/admin/search_book/edit" })
+      pages.push({ text:"Delete Book", href:"/admin/search_book/delete" })
+      pages.push({ text:"View Users", href:"/admin/view_users" })
+      pages.push({ text:"Manage Guards", href:"/admin/manage_guards" })
+      pages.push({ text:"Manage Admin", href:"/admin/manage_admin" })
+      pages.push({ text:"View Statistics", href:"/admin/view_statistics" })
+      pages.push({ text:"Activity Log", href:"/admin/activity_logs" })
+    }
 
 
-
+    const studentLogout = () =>{
+      return (
+        <>
+                <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_studentName")} ({localStorage.getItem("auth_studentID")})</Button>
+                <Button onClick={()=>{localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                  Logout
+                </Button>
+                </>
+      )
+    }
+    const guardLogout = () =>{
+      return (
+        <>
+        <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_guardName")}</Button>
+                <Button onClick={()=>{localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                  Logout
+                </Button>
+        </>
+      )
+    }
+    const adminLogout = () =>{
+      return (
+        <>
+        <Button variant="" sx={{ marginLeft: "auto" }}>{"-Admin Name-"}</Button>
+                <Button onClick={()=>{toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                  Logout
+                </Button>
+        </>
+      )
+    }
+    const loginOrSignUp = () =>{
+      return (<>
+        <Button onClick={()=>navigate("/student/login")} sx={{ marginLeft: "auto" }} variant="contained">
+        Login
+        </Button>
+        <Button onClick={()=>navigate("/student/registration")} sx={{ marginLeft: "10px", background:"green" }} variant="contained">
+          SignUp
+        </Button>
+      </>
+      )
+    }
 
   return (
     <React.Fragment>
       <AppBar sx={{ background: "#09509e" }}>
         <Toolbar>
-          <font size="5">DIU Library Service</font>
+          <img onClick={()=>navigate('/')} src="/diulogo_white.png" width="100px" style={{marginRight:"8px", marginLeft:"10px"}}/>
+          <font size="2"><b>Library<br/>Service</b></font>
           {isMatch ? (
             <>
               <DrawerComp data = {pages}/>
@@ -87,30 +169,22 @@ const Header = () => {
 
 
               {
-                localStorage.getItem("auth_studentID")?
-                <>
-                <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_studentName")} ({localStorage.getItem("auth_studentID")})</Button>
-                <Button onClick={()=>{localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} sx={{ marginLeft: "10px" }} variant="contained">
-                  Logout
-                </Button>
-                </>
+                role=="student"?
+                  localStorage.getItem("auth_studentID")?
+                    studentLogout()
+                    :
+                    loginOrSignUp()
                 :
-                localStorage.getItem("auth_guardID")?
-                <>
-                <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_guardName")}</Button>
-                <Button onClick={()=>{localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} sx={{ marginLeft: "10px" }} variant="contained">
-                  Logout
-                </Button>
-                </>
+                role=="guards"?
+                  localStorage.getItem("auth_guardID")?
+                    guardLogout()
+                    :
+                    <></>
                 :
-                <>
-                  <Button onClick={()=>navigate("/student/login")} sx={{ marginLeft: "auto" }} variant="contained">
-                  Login
-                  </Button>
-                  <Button onClick={()=>navigate("/student/registration")} sx={{ marginLeft: "10px", background:"green" }} variant="contained">
-                    SignUp
-                  </Button>
-                </>
+                role=="admin"?
+                  adminLogout()
+                  :
+                  <></>
               }
 
 

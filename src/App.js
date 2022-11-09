@@ -17,6 +17,8 @@ import AdminDashboard from './components/admin/Dashboard';
 import AddBook from './components/admin/add_book/AddBook';
 import EditBook from './components/admin/edit_book/EditBook';
 import SearchBook from './components/admin/search_book/SearchBook';
+import ReDirect from './components/admin/delete_book/ReDirect';
+import ManageGuards from './components/admin/manage_guards/ManageGuards';
 
 function App() {
   return (
@@ -41,7 +43,10 @@ function App() {
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/admin/add_book' element={<AddBook />} />
         <Route path='/admin/search_book/:action' element={<SearchBook />} />
+        <Route path='/admin/search_book/' element={<ReDirect />} />
         <Route path='/admin/edit_book/:bookID' element={<EditBook />} />
+
+        <Route path='/admin/manage_guards' element={<ManageGuards />} />
 
       </Routes>
     </BrowserRouter>

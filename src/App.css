@@ -80,6 +80,14 @@
   background: white;
   z-index: 5;
 }
+.guardCard{
+  background:#f0f0f0;
+  padding:12px;
+  margin:15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  overflow:hidden
+}
 
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */

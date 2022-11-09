@@ -44,6 +44,7 @@ export default function Student(props) {
 
     const methods = require("../methods.js");
     const api = methods.API();
+    methods.Guard_verification();
 
     useEffect(() => {
         //axios.get(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${id}`, {

@@ -48,6 +48,50 @@ function Student_verification(){
     
 }
 
+
+function Guard_verification(){
+    const navigate = useNavigate();
+    const auth_guardID = localStorage.getItem("auth_guardID");
+    const auth_guardPassword = localStorage.getItem("auth_guardPassword");
+    if(auth_guardID=="" || auth_guardID==null){
+        navigate("/guards/login");
+    } 
+    //console.log(auth_password, auth_studentID)
+    var md5 = require('md5');
+    let toast = require('./toast.js');
+    
+    useEffect(() => {
+        axios.post(API()+'/guards/individualGuardInfo', {
+            //parameters
+            guardEmpID : auth_guardID
+        })
+            .then((response) => {
+                if(response.data.status=="done"){
+                    if(md5(response.data.result[0].password)==auth_guardPassword){
+                        //localStorage.setItem("auth_studentID", auth_studentID);
+                        //localStorage.setItem("auth_password", auth_password);
+                    }
+                    else{
+                        //toast.msg("Please login", "red", 3000);
+                        localStorage.setItem("auth_guardID", "");
+                        localStorage.setItem("auth_guardPassword", "");
+                        localStorage.setItem("auth_guardName", "");
+                        navigate("/guards/login");
+                    }
+                }
+                else{
+                    //toast.msg("Please login", "red", 3000);
+                    localStorage.setItem("auth_guardID", "");
+                    localStorage.setItem("auth_guardPassword", "");
+                    localStorage.setItem("auth_guardName", "");
+                    navigate("/guards/login");
+                }
+            }, (error) => {
+                console.log(error);
+        });
+    }, [])
+}
+
 function getRandomOTP(){
     const d = new Date();
     let time = d.getTime();
@@ -106,4 +150,4 @@ function getTimeMilliseconds(){
     return time.toString();
 }
 
-export {API, getRandomOTP, Student_verification, getDate, getMonthName, getTime, getTimeMilliseconds};
+export {API, getRandomOTP, Student_verification, Guard_verification, getDate, getMonthName, getTime, getTimeMilliseconds};

@@ -11,9 +11,6 @@ export default function Login() {
     const [btnLoading, setBtnLoading] = useState(false)
 
     useEffect(() => {
-
-        localStorage.setItem("auth_studentID", ""); //logout from student role
-
         if(localStorage.getItem("auth_guardID")){
             navigate("/guards/all_distributed_key")
         }

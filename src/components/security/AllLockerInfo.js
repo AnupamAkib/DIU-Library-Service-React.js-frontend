@@ -60,6 +60,7 @@ export default function AllLockerInfo() {
     const methods = require('../methods.js');
     let toast = require('../toast.js');
     const api = methods.API();
+    methods.Guard_verification();
 
     const [allLockerInfo, setAllLockerInfo] = useState([]);
 

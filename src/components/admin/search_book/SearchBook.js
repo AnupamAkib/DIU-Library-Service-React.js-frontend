@@ -2,12 +2,14 @@ import React from 'react'
 import SearchBookCard from './Card';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../../Loading';
 import { Button } from '@mui/material';
 
 export default function SearchBook() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const {action} = useParams();
+    //console.log(action)
     const [allBooks, setAllBooks] = useState([]);
     const [searchKey, setSearchKey] = useState("");
     const [bookCards, setBookCards] = useState([]);
@@ -59,6 +61,7 @@ export default function SearchBook() {
                     addedDate={allBooks[i].added_date}
                     tags={allBooks[i].tags}
                     description={allBooks[i].description}
+                    action = {action}
                 />]);
             }
             if(i<perPageBook && searchedBook.length==0){
@@ -71,6 +74,7 @@ export default function SearchBook() {
                     addedDate={allBooks[i].added_date}
                     tags={allBooks[i].tags}
                     description={allBooks[i].description}
+                    action = {action}
                 />]);
             }
         }
@@ -94,9 +98,13 @@ export default function SearchBook() {
     }
 
     useEffect(() => {
-        console.log({pageStart})
+        //console.log({pageStart})
     }, [pageStart])
     
+
+    if(action!="edit" && action!="delete"){
+        return <div><h1 align='center'><br/>Invalid action</h1></div>
+    }
 
     if(dataLoading){
         return <Loading/>
@@ -105,7 +113,7 @@ export default function SearchBook() {
     return (
         <div className='container'>
             <center>
-                <h1>Select A Book to Edit</h1>
+                <h1>Select book to {action}</h1>
                 <input onChange={(e)=>setSearchKey(e.target.value)} value={searchKey} type="search" style={{outline:"none", width:"90%", padding:"12px", fontSize:"large"}} placeholder="Search book, author, tags"/>
             </center>
             <br/>
