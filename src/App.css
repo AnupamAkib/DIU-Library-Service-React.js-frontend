@@ -88,7 +88,14 @@
   border-radius: 8px;
   overflow:hidden
 }
-
+.adminCard{
+  background-color: #f0f0f0;
+  padding:8px 8px 15px 8px;
+  border-radius:7px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
+  margin:3px;
+  margin-bottom:17px
+}
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */
   [class*="col-"] {

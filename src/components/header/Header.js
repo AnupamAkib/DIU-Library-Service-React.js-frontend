@@ -146,7 +146,7 @@ const Header = () => {
       <AppBar sx={{ background: "#09509e" }}>
         <Toolbar>
           <img onClick={()=>navigate('/')} src="/diulogo_white.png" width="100px" style={{marginRight:"8px", marginLeft:"10px"}}/>
-          <font size="2"><b>Library<br/>Service</b></font>
+          
           {isMatch ? (
             <>
               <DrawerComp data = {pages}/>
