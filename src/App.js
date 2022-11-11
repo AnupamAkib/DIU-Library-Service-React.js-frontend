@@ -20,6 +20,7 @@ import SearchBook from './components/admin/search_book/SearchBook';
 import ReDirect from './components/admin/delete_book/ReDirect';
 import ManageGuards from './components/admin/manage_guards/ManageGuards';
 import ManageAdmin from './components/admin/manage_admin/ManageAdmin';
+import RedirectToManageAdmin from './components/admin/manage_admin/RedirectToManageAdmin';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path='/admin/edit_book/:bookID' element={<EditBook />} />
         <Route path='/admin/manage_guards' element={<ManageGuards />} />
         <Route path='/admin/manage_admin' element={<ManageAdmin />} />
+        <Route path='/admin/redirect' element={<RedirectToManageAdmin />} />
 
       </Routes>
     </BrowserRouter>
