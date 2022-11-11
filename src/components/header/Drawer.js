@@ -54,7 +54,7 @@ const DrawerComp = (props) => {
     }
     const adminLogout = () =>{
       return (
-        <Button onClick={()=>{setOpenDrawer(false); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} variant="text">
+        <Button onClick={()=>{setOpenDrawer(false); localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} variant="text">
           Logout
         </Button>
       )
@@ -98,10 +98,10 @@ const DrawerComp = (props) => {
               <b>EmpID:</b> {localStorage.getItem("auth_guardID")}<br/>
               <b>Role:</b> Security Guard<br/>
             </div> : 
-            role=="admin"?
+            localStorage.getItem("auth_adminUsername") && role=="admin"?
             <div style={{padding:"18px"}}>
-              <b>Admin Name</b><br/>
-              <b>EmpID: </b><br/>
+              <b className="capitalize">{localStorage.getItem("auth_adminName")}</b><br/>
+              <b>User:</b> {localStorage.getItem("auth_adminUsername")}<br/>
               <b>Role:</b> Admin<br/>
             </div> : 
             <></>
@@ -131,7 +131,8 @@ const DrawerComp = (props) => {
                       <></>
                   :
                   role=="admin"?
-                    adminLogout()
+                    localStorage.getItem("auth_adminUsername")?
+                      adminLogout() : <></>
                     :
                     <></>
                 }

@@ -87,15 +87,40 @@ const Header = () => {
       }
     }
     else if(role=="admin"){ //get admin access from localstorage data
-      pages.push({ text:"Dashboard", href:"/admin" })
-      pages.push({ text:"Add Book", href:"/admin/add_book" })
-      pages.push({ text:"Edit Book", href:"/admin/search_book/edit" })
-      pages.push({ text:"Delete Book", href:"/admin/search_book/delete" })
-      pages.push({ text:"View Users", href:"/admin/view_users" })
-      pages.push({ text:"Manage Guards", href:"/admin/manage_guards" })
-      pages.push({ text:"Manage Admin", href:"/admin/manage_admin" })
-      pages.push({ text:"View Statistics", href:"/admin/view_statistics" })
-      pages.push({ text:"Activity Log", href:"/admin/activity_logs" })
+      if(localStorage.getItem("auth_adminUsername")){
+        pages.push({ text:"Dashboard", href:"/admin" })
+        let access = localStorage.getItem("props").split(",");
+        //console.log(access)
+        for(let i=0; i<access.length; i++){
+          if(access[i]=='1'){
+            pages.push({ text:"Add Book", href:"/admin/add_book" })
+          }
+          if(access[i]=='2'){
+            pages.push({ text:"Edit Book", href:"/admin/search_book/edit" })
+          }
+          if(access[i]=='3'){
+            pages.push({ text:"Delete Book", href:"/admin/search_book/delete" })
+          }
+          if(access[i]=='4'){
+            pages.push({ text:"View Users", href:"/admin/view_users" })
+          }
+          if(access[i]=='5'){
+            pages.push({ text:"Manage Guards", href:"/admin/manage_guards" })
+          }
+          if(access[i]=='6'){
+            pages.push({ text:"Manage Admin", href:"/admin/manage_admin" })
+          }
+          if(access[i]=='7'){
+            pages.push({ text:"View Statistics", href:"/admin/view_statistics" })
+          }
+          if(access[i]=='8'){
+            pages.push({ text:"Activity Log", href:"/admin/activity_logs" })
+          }
+        }
+      }
+      else{
+        pages.push({ text:"Admin Login", href:"/admin/login" })
+      }
     }
 
 
@@ -122,8 +147,8 @@ const Header = () => {
     const adminLogout = () =>{
       return (
         <>
-        <Button variant="" sx={{ marginLeft: "auto" }}>{"-Admin Name-"}</Button>
-                <Button onClick={()=>{toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+        <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_adminName")}</Button>
+                <Button onClick={()=>{localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} sx={{ marginLeft: "10px" }} variant="contained">
                   Logout
                 </Button>
         </>
@@ -182,7 +207,8 @@ const Header = () => {
                     <></>
                 :
                 role=="admin"?
-                  adminLogout()
+                  localStorage.getItem("auth_adminUsername")?
+                    adminLogout() : <></>
                   :
                   <></>
               }

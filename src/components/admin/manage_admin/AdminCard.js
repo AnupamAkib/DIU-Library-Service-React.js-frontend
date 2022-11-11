@@ -141,7 +141,7 @@ export default function AdminCard(props) {
         if(manageAdmin){tmp.push(6);}
         if(viewStatistics){tmp.push(7);}
         if(activityLogs){tmp.push(8);}
-        console.log({name, username, password, tmp})
+        //console.log({name, username, password, tmp})
         //clear to edit
         //editAdmin
         seteditBtnLoading(true);

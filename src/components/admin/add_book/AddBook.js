@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import Loading from '../../Loading';
 
 export default function AddBook() {
     const navigate = useNavigate();
@@ -11,6 +11,42 @@ export default function AddBook() {
     const methods = require("../../methods.js");
     const toast = require("../../toast.js");
     const api = methods.API();
+
+
+    const [actionLoading, setActionLoading] = useState(true);
+    const verification = async () =>{
+        var md5 = require('md5');
+        axios.post(api+'/admin/readAllAdmin', {})
+            .then((response) => {
+                let data = response.data.result;
+                let found = false;
+                for(let i=0; i<data.length; i++){
+                    if(data[i].username==localStorage.getItem("auth_adminUsername") && md5(data[i].password)==localStorage.getItem("auth_adminPassword")){
+                        let access = data[i].access;
+                        found = true;
+                        let hasAccess = false;
+                        for(let k=0; k<access.length; k++){
+                            if(access[k] == 1){
+                                hasAccess = true; break;
+                            }
+                        }
+                        if(!hasAccess){toast.msg("No Access!", "red", 3000); navigate("/admin/")}
+                        setActionLoading(false);
+                        break;
+                    }
+                }
+                if(!found){toast.msg("You must login first", "red", 3000); navigate("/admin/login")}
+            }, (error) => {
+                alert(error);
+            });
+    }
+    useEffect(() => {
+        setActionLoading(true);
+        verification();
+    }, [])
+
+
+
 
     const [state_pdf, setState_pdf] = useState({
         selectedFile: "",
@@ -184,6 +220,10 @@ export default function AddBook() {
             setErrorMsg_tags(`Tag is too long (max length ${maxLength})`)
         }
     }, [tags])
+
+    if(actionLoading){
+        return <Loading/>
+    }
 
     return (
         <div className='container col-5'>

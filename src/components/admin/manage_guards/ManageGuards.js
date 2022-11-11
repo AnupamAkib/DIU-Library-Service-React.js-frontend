@@ -8,6 +8,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import { useNavigate } from 'react-router-dom'
 
 
 const style = {
@@ -23,6 +24,7 @@ const style = {
   };
 
 export default function ManageGuards() {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [guardsData, setGuardsData] = useState([]);
     const [open, setOpen] = useState(false);
@@ -31,6 +33,41 @@ export default function ManageGuards() {
     const [empID, setEmpID] = useState("");
     const [reload, setReload] = useState(false);
     const [addBtnLoading, setAddBtnLoading] = useState(false);
+
+
+    const [actionLoading, setActionLoading] = useState(true);
+    const verification = async () =>{
+        var md5 = require('md5');
+        axios.post(api+'/admin/readAllAdmin', {})
+            .then((response) => {
+                let data = response.data.result;
+                let found = false;
+                for(let i=0; i<data.length; i++){
+                    if(data[i].username==localStorage.getItem("auth_adminUsername") && md5(data[i].password)==localStorage.getItem("auth_adminPassword")){
+                        let access = data[i].access;
+                        found = true;
+                        let hasAccess = false;
+                        for(let k=0; k<access.length; k++){
+                            if(access[k] == 5){
+                                hasAccess = true; break;
+                            }
+                        }
+                        if(!hasAccess){toast.msg("No Access!", "red", 3000); navigate("/admin/")}
+                        setActionLoading(false);
+                        break;
+                    }
+                }
+                if(!found){toast.msg("You must login first", "red", 3000); navigate("/admin/login")}
+            }, (error) => {
+                alert(error);
+            });
+    }
+    useEffect(() => {
+        setActionLoading(true);
+        verification();
+    }, [])
+
+
 
     const handleOpen = () => {
         setName("");
@@ -119,6 +156,10 @@ export default function ManageGuards() {
                 console.log(error); 
                 toast.msg("Sorry, something went wrong", "", 3000);
         });
+    }
+
+    if(actionLoading){
+        return <Loading/>
     }
 
     if(loading){

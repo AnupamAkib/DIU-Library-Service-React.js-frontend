@@ -21,6 +21,7 @@ import ReDirect from './components/admin/delete_book/ReDirect';
 import ManageGuards from './components/admin/manage_guards/ManageGuards';
 import ManageAdmin from './components/admin/manage_admin/ManageAdmin';
 import RedirectToManageAdmin from './components/admin/manage_admin/RedirectToManageAdmin';
+import AdminLogin from './components/admin/login/AdminLogin';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path='/guards/login' element={<SecurityLogin />} />
         <Route path='/guards/view_student_info' element={<ViewStudent />} />
 
+        <Route path='/admin/login' element={<AdminLogin />} />
         <Route path='/admin' element={<AdminDashboard />} />
         <Route path='/admin/add_book' element={<AddBook />} />
         <Route path='/admin/search_book/:action' element={<SearchBook />} />

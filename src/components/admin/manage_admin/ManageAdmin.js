@@ -36,6 +36,39 @@ export default function ManageAdmin() {
     const [loading, setLoading] = useState(true);
     const [adminData, setAdminData] = useState([]);
 
+
+    const [actionLoading, setActionLoading] = useState(true);
+    const verification = async () =>{
+        var md5 = require('md5');
+        axios.post(api+'/admin/readAllAdmin', {})
+            .then((response) => {
+                let data = response.data.result;
+                let found = false;
+                for(let i=0; i<data.length; i++){
+                    if(data[i].username==localStorage.getItem("auth_adminUsername") && md5(data[i].password)==localStorage.getItem("auth_adminPassword")){
+                        let access = data[i].access;
+                        found = true;
+                        let hasAccess = false;
+                        for(let k=0; k<access.length; k++){
+                            if(access[k] == 6){ //manage admin = 6
+                                hasAccess = true; break;
+                            }
+                        }
+                        if(!hasAccess){toast.msg("No Access!", "red", 3000); navigate("/admin/")}
+                        setActionLoading(false);
+                        break;
+                    }
+                }
+                if(!found){toast.msg("You must login first", "red", 3000); navigate("/admin/login")}
+            }, (error) => {
+                alert(error);
+            });
+    }
+    useEffect(() => {
+        setActionLoading(true);
+        verification();
+    }, [])
+
     
 
     const fetchData = async () =>{
@@ -130,6 +163,7 @@ export default function ManageAdmin() {
                         //console.log(response.data.result)
                         setAddBtnLoading(false);
                         handleClose();
+                        toast.msg("Admin Added Successfully", "green", 3000);
                         setReload(!reload);
                     }
                     else{
@@ -156,6 +190,10 @@ export default function ManageAdmin() {
     }
 
 
+    if(actionLoading){
+        return <Loading/>
+    }
+    
     if(loading){
         return <Loading/>
     }

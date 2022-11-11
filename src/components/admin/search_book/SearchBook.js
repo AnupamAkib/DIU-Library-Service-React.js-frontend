@@ -24,6 +24,48 @@ export default function SearchBook() {
     let toast = require('../../toast.js');
     const api = methods.API();
 
+
+
+    const [actionLoading, setActionLoading] = useState(true);
+    const verification = async () =>{
+        var md5 = require('md5');
+        axios.post(api+'/admin/readAllAdmin', {
+            //parameters
+        })
+            .then((response) => {
+                //console.log(response.data)
+                let data = response.data.result;
+                let found = false;
+                for(let i=0; i<data.length; i++){
+                    if(data[i].username==localStorage.getItem("auth_adminUsername") && md5(data[i].password)==localStorage.getItem("auth_adminPassword")){
+                        //console.log(data[i].access);
+                        let access = data[i].access;
+                        found = true;
+                        let hasAccess = false;
+                        let access_val = (action=="delete"? 3 : action=="edit"? 2 : 0);
+                        for(let k=0; k<access.length; k++){
+                            if(access[k] == access_val){ //delete book = 3
+                                hasAccess = true; break;
+                            }
+                        }
+                        if(!hasAccess){toast.msg("No Access!", "red", 3000); navigate("/admin/")}
+                        setActionLoading(false);
+                        break;
+                    }
+                }
+                if(!found){toast.msg("You must login first", "red", 3000); navigate("/admin/login")}
+            }, (error) => {
+                alert(error);
+            });
+    }
+    useEffect(() => {
+        setActionLoading(true);
+        verification();
+    }, [action])
+    
+
+
+
     const [dataLoading, setDataLoading] = useState(true);
 
     useEffect(() => {
@@ -105,6 +147,8 @@ export default function SearchBook() {
     if(action!="edit" && action!="delete"){
         return <div><h1 align='center'><br/>Invalid action</h1></div>
     }
+
+    if(actionLoading){return <Loading/>}
 
     if(dataLoading){
         return <Loading/>

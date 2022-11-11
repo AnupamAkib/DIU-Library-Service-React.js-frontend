@@ -125,7 +125,7 @@ export default function Login() {
                 <form onSubmit={checkLogin}>
                     <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
                     <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Password==""? false : true} helperText={errorMsg_Password} required/><br/>
-                    <Button type="submit" variant="contained" fullWidth disabled={(errorMsg_ID=="" && studentID.length && errorMsg_Password=="" && password.length)? btnLoading? true : false : true}>Login</Button>
+                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(errorMsg_ID=="" && studentID.length && errorMsg_Password=="" && password.length)? btnLoading? true : false : true}>Login</Button>
                 </form>
 
                 <center><div style={{padding:"8px"}}>OR</div></center>

@@ -10,7 +10,7 @@ export default function DeleteBook(props) {
     const title = props.title;
     const writer = props.writer;
 
-
+    
     const [btnLoading, setBtnLoading] = useState(false);
     const [password, setPassword] = useState("")
     
