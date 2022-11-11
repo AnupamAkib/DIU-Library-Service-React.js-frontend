@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { Button, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import md5 from 'md5';
 
 export default function DeleteBook(props) {
     const navigate = useNavigate();
@@ -22,19 +23,23 @@ export default function DeleteBook(props) {
     const deleteBook = (e) =>{
         e.preventDefault();
         setBtnLoading(true);
-        //axios.post(api+'/library/deleteBook', {
-        //    //parameters
-        //    _id : ID
-        //})
-        //    .then((response) => {
-        //        //response
-                setBtnLoading(false);
-                //console.log(password)
-                toast.msg("Book Deletion Successful", "green", 3000);
-                navigate("/admin/search_book/");
-        //    }, (error) => {
-        //        console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
-        //    });
+        if(localStorage.getItem("auth_adminPassword") == md5(password)){
+            axios.post(api+'/library/deleteBook', {
+                //parameters
+                _id : ID
+            })
+                .then((response) => {
+                    //response
+                    setBtnLoading(false);
+                    toast.msg("Book Deletion Successful", "green", 3000);
+                    navigate("/admin/search_book/");
+                }, (error) => {
+                    console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
+                });
+        }
+        else{
+            toast.msg("Incorrect Admin Password", "red", 3000);
+        }
     }
     return (
         <div>

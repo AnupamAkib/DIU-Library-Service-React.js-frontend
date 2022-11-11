@@ -22,6 +22,8 @@ import ManageGuards from './components/admin/manage_guards/ManageGuards';
 import ManageAdmin from './components/admin/manage_admin/ManageAdmin';
 import RedirectToManageAdmin from './components/admin/manage_admin/RedirectToManageAdmin';
 import AdminLogin from './components/admin/login/AdminLogin';
+import ActivityLog from './components/admin/activity_log/ActivityLog';
+
 
 function App() {
   return (
@@ -52,7 +54,8 @@ function App() {
         <Route path='/admin/manage_guards' element={<ManageGuards />} />
         <Route path='/admin/manage_admin' element={<ManageAdmin />} />
         <Route path='/admin/redirect' element={<RedirectToManageAdmin />} />
-
+        <Route path='/admin/activity_logs' element={<ActivityLog />} />
+        
       </Routes>
     </BrowserRouter>
   );

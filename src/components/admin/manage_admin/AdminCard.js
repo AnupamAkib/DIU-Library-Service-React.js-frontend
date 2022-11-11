@@ -62,6 +62,13 @@ export default function AdminCard(props) {
                     //console.log(response.data.result)
                     setBtnLoading(false);
                     toast.msg("Admin Deleted Successfully", "green", 3000);
+                    if(localStorage.getItem("auth_adminUsername") == _username){
+                        localStorage.setItem("auth_adminUsername", "");
+                        localStorage.setItem("auth_adminPassword", "");
+                        localStorage.setItem("props", "");
+                        toast.msg("You are no more admin", "red", 2500);
+                        navigate("/admin/login")
+                    }
                     setdeleted(true);
                 }
                 else{
@@ -159,6 +166,12 @@ export default function AdminCard(props) {
                     seteditBtnLoading(false);
                     handleClose();
                     toast.msg("Admin Edited Successfully", "green", 3000);
+                    var md5 = require('md5');
+                    if(localStorage.getItem("auth_adminUsername") == _username){
+                        localStorage.setItem("auth_adminName", name);
+                        localStorage.setItem("auth_adminPassword", md5(password));
+                        localStorage.setItem("props", tmp);
+                    }
                     navigate("/admin/redirect");
                 }
                 else{
@@ -193,9 +206,9 @@ export default function AdminCard(props) {
 
     return (
         <div className="adminCard" style={{display:deleted?"none":""}}>
-            <b>Name:</b> <font className='capitalize' color="#303030" style={{fontWeight:"bold", fontSize:"large"}}>{name}</font><br/>
-            <b>Username:</b> {username}<br/>
-            <b>Password:</b> {password}<br/>
+            <b>Name:</b> <font className='capitalize' color="#303030" style={{fontWeight:"bold", fontSize:"large"}}>{_name}</font><br/>
+            <b>Username:</b> {_username}<br/>
+            <b>Password:</b> {_password}<br/>
             <table style={{marginBottom:"8px"}}>
                 <tr>
                     <td style={{verticalAlign: "top"}}>
