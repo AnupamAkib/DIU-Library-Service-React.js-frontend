@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 import { useLocation } from 'react-router-dom'
 
 const DrawerComp = (props) => {
+    const methods = require("../methods")
     const navigate = useNavigate();
     const location = useLocation();
     const [role, setRole] = useState("");
@@ -40,21 +41,21 @@ const DrawerComp = (props) => {
 
     const studentLogout = () =>{
       return (
-        <Button onClick={()=>{setOpenDrawer(false); localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} variant="text">
+        <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_studentName")} logged out from the system`, "student", localStorage.getItem("auth_studentID")); setOpenDrawer(false); localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} variant="text">
           Logout
         </Button>
       )
     }
     const guardLogout = () =>{
       return (
-        <Button onClick={()=>{setOpenDrawer(false); localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} variant="text">
+        <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_guardName")} logged out from the system`, "security guard", localStorage.getItem("auth_guardID"));setOpenDrawer(false); localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} variant="text">
           Logout
         </Button>
       )
     }
     const adminLogout = () =>{
       return (
-        <Button onClick={()=>{setOpenDrawer(false); localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} variant="text">
+        <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_adminName")} logged out from the system`, "admin", localStorage.getItem("auth_adminUsername"));setOpenDrawer(false); localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} variant="text">
           Logout
         </Button>
       )

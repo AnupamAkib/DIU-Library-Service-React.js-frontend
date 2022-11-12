@@ -103,7 +103,13 @@
   margin:10px 5px 10px 5px;
   font-size: small;
 }
-
+.student_card{
+  background-color: #f0f0f0;
+  padding:15px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.30);
+  margin-bottom: 15px;
+}
 
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */

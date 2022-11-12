@@ -40,6 +40,7 @@ export default function Login() {
                         localStorage.setItem("auth_guardName", response.data.result[0].guardName);
                         localStorage.setItem("auth_guardPassword", md5(password));
                         setBtnLoading(false);
+                        methods.activity(`${localStorage.getItem("auth_guardName")} logged in to the system`, "security guard", employeeID);
                         navigate("/guards/all_distributed_key");
                     }
                     else{

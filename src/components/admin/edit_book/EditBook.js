@@ -103,6 +103,7 @@ export default function EditBook() {
                 //console.log(response.data.status);
                 if(response.data.status=="done"){
                     toast.msg("Successfully Edited", "green", 3000);
+                    methods.activity(`${localStorage.getItem("auth_adminName")} edited book '${title.split(" ")[0]} ${title.split(" ")[1]}...'`, "admin", localStorage.getItem("auth_adminUsername"));
                     navigate("/admin/search_book/edit")
                 }
                 else{

@@ -164,6 +164,7 @@ export default function ManageAdmin() {
                         setAddBtnLoading(false);
                         handleClose();
                         toast.msg("Admin Added Successfully", "green", 3000);
+                        methods.activity(`${localStorage.getItem("auth_adminName")} added '${name}' as an admin`, "admin", localStorage.getItem("auth_adminUsername"))
                         setReload(!reload);
                     }
                     else{

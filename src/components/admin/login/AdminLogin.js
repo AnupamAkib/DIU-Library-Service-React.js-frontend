@@ -42,6 +42,7 @@ export default function AdminLogin() {
                             localStorage.setItem("auth_adminPassword", md5(password));
                             localStorage.setItem("auth_adminName", data[i].name);
                             localStorage.setItem("props", data[i].access);
+                            methods.activity(`${localStorage.getItem("auth_adminName")} logged in to the system`, "admin", localStorage.getItem("auth_adminUsername"));
                             found=true;
                             break;
                         }

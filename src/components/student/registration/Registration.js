@@ -117,6 +117,7 @@ export default function Registration() {
                     setNextBtnLoading(false);
                 }
                 else{
+                    //console.log(otp)
                     //do register
                     //axios.get(`http://software.diu.edu.bd:8189/result/studentInfo?studentId=${studentID}`, {
                     axios.get(`/api/studentInfo?studentId=${studentID}`, {

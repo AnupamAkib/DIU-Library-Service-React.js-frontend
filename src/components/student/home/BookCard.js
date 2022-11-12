@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom"
 
 export default function BookCard(props) {
     let navigate = useNavigate();
+    const methods = require("../../methods");
     const ID = props.ID;
     const title = props.title;
     const description = props.description;
@@ -35,6 +36,7 @@ export default function BookCard(props) {
         localStorage.setItem("thumbnail", thumbnail);
         localStorage.setItem("bookLink", bookLink);
         localStorage.setItem("addedDate", addedDate);
+        methods.activity(`${localStorage.getItem("auth_studentName")} opened book '${title}'`, "student", localStorage.getItem("auth_studentID"));
         navigate("/book/details/"+ID);
     }
 

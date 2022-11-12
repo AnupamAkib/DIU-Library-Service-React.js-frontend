@@ -30,7 +30,7 @@ export default function ViewStudent() {
             <h1 align="center">Search Student</h1>
             <div className='container col-5'>
                 <form onSubmit={searchStudent}>
-                    <input value={studentID} onChange={(e)=>setStudentID(e.target.value)} type="search" placeholder="Search ID" style={{width:"100%", padding:"10px", fontSize:"large", outline:"none"}}/>
+                    <input value={studentID} onChange={(e)=>setStudentID(e.target.value)} type="search" placeholder="Search Student ID" style={{width:"100%", padding:"10px", fontSize:"large", outline:"none"}}/>
                 </form>
             </div>
             <Student id ={ID}/>

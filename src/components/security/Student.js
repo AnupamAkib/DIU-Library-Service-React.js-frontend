@@ -60,6 +60,7 @@ export default function Student(props) {
                     setShift(response.data.shift);
                     setFacultyName(response.data.facultyName);
                     setFound(true);
+                    methods.activity(`${localStorage.getItem("auth_guardName")} searched student ID ${id}`, "security guard", localStorage.getItem("auth_guardID"));
                     //console.log(response.data)
                 }
                 else{
@@ -155,6 +156,6 @@ export default function Student(props) {
         )
     }
     else{
-        return <div align='center' style={{background:"#f0f0f0", padding:"15px", marginTop:"10vh"}} className="container col-5"><h1 align='center'>Student Not Found</h1>Please check your student ID</div>
+        return <div align='center' style={{background:"#fff", padding:"15px", marginTop:"100px"}} className="container col-5"><h1 align='center'>Student Not Found</h1>Please check your student ID</div>
     }
 }

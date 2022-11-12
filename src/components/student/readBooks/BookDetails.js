@@ -103,6 +103,7 @@ export default function BookDetails() {
                 toast.msg("Saved in your booklist", "green", 2500);
                 setBookListFlag(true);
                 setBookListBtnLoading(false);
+                methods.activity(`${localStorage.getItem("auth_studentName")} added book '${title.split(" ")[0]} ${title.split(" ")[1]}' to booklist`, "student", localStorage.getItem("auth_studentID"));
             }, (error) => {
                 console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
@@ -119,6 +120,7 @@ export default function BookDetails() {
                 toast.msg("Removed from booklist", "red", 2500);
                 setBookListFlag(false);
                 setBookListBtnLoading(false);
+                methods.activity(`${localStorage.getItem("auth_studentName")} removed book '${title.split(" ")[0]} ${title.split(" ")[1]}' from booklist`, "student", localStorage.getItem("auth_studentID"));
             }, (error) => {
                 console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });
@@ -151,7 +153,7 @@ export default function BookDetails() {
             <b>Book Added: </b>{addedDate}<br/><br/>
 
             <div className='container col-6'>
-                <Button onClick={()=>navigate("/book/read/"+_id)} variant="contained" fullWidth>Read book</Button>
+                <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_studentName")} read book '${title}'`, "student", localStorage.getItem("auth_studentID"));navigate("/book/read/"+_id)}} variant="contained" fullWidth>Read book</Button>
                 {
                     bookListBtnLoading? <Button varient="contained" fullWidth disabled>Wait</Button> : 
                     bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"gray", marginTop:"10px"}} variant="contained" fullWidth>REmove from book list</Button> : 

@@ -35,7 +35,7 @@ export default function Dashboard() {
                         found = true;
                         for(let k=0; k<access.length; k++){
                             if(access[k]==1){
-                                setAction(oldArray => [...oldArray, <Card href="/admin/add_book" icon="fas fa-book-open">Add Book</Card>]);
+                                setAction(oldArray => [...oldArray, <Card href="/admin/add_book" icon="fas fa-book">Add Book</Card>]);
                             }
                             if(access[k]==2){
                                 setAction(oldArray => [...oldArray, <Card href="/admin/search_book/edit" icon="fas fa-edit">Edit Book</Card>]);

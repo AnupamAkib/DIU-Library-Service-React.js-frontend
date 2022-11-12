@@ -108,6 +108,7 @@ export default function AddBook() {
                     //console.log(response.data.status);
                     if(response.data.status=="done"){
                         toast.msg("Book successfully added", "green", 3000);
+                        methods.activity(`${localStorage.getItem("auth_adminName")} added book '${title.split(" ")[0]} ${title.split(" ")[1]}...'`, "admin", localStorage.getItem("auth_adminUsername"));
                         navigate("/admin/");
                     }
                     else{
@@ -227,7 +228,7 @@ export default function AddBook() {
 
     return (
         <div className='container col-5'>
-            {btnLoading? <div className='book_adding_loading'><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><div className='container col-3'><div style={{background:"white", padding:"18px", margin:"15px", borderRadius:"10px"}}><center><b><CircularProgress /><br/>Adding Book...</b><br/>Please Wait, it may take few seconds.<br/>Do not refreash the page</center></div></div></div>
+            {btnLoading? <div className='book_adding_loading'><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><div className='container col-3'><div style={{background:"white", padding:"18px", margin:"15px", borderRadius:"10px"}}><center><b><CircularProgress /><br/>Uploading Book...</b><br/>Please Wait, it may take few seconds.<br/>Do not refreash the page</center></div></div></div>
             :""}
             <div className='inputContainer'>
                 <h1 align='center'>Add Book</h1>

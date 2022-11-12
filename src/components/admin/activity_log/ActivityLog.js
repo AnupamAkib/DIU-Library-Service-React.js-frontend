@@ -16,17 +16,58 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function ActivityLog() {
+    const navigate = useNavigate();
     const [activityAll, setActivityAll] = useState([])
     const methods = require("../../methods.js");
     const toast = require("../../toast.js");
     const api = methods.API();
 
+
+
+    const [actionLoading, setActionLoading] = useState(true);
+    const verification = async () =>{
+        var md5 = require('md5');
+        axios.post(api+'/admin/readAllAdmin', {})
+            .then((response) => {
+                let data = response.data.result;
+                let found = false;
+                for(let i=0; i<data.length; i++){
+                    if(data[i].username==localStorage.getItem("auth_adminUsername") && md5(data[i].password)==localStorage.getItem("auth_adminPassword")){
+                        let access = data[i].access;
+                        found = true;
+                        let hasAccess = false;
+                        for(let k=0; k<access.length; k++){
+                            if(access[k] == 8){ //8 = activity log
+                                hasAccess = true; break;
+                            }
+                        }
+                        if(!hasAccess){toast.msg("No Access!", "red", 3000); navigate("/admin/")}
+                        setActionLoading(false);
+                        break;
+                    }
+                }
+                if(!found){toast.msg("You must login first", "red", 3000); navigate("/admin/login")}
+            }, (error) => {
+                alert(error);
+            });
+    }
+    useEffect(() => {
+        setActionLoading(true);
+        verification();
+    }, [])
+
+
+
+
+
     const [loading, setloading] = useState(true)
     const [selectedRole, setSelectedRole] = useState("all")
     const [data, setData] = useState([])
-
+    const [reload, setReload] = useState(false);
 
 
     const [open, setOpen] = useState(false);
@@ -49,7 +90,7 @@ export default function ActivityLog() {
             }, (error) => {
                 alert(error);
             });
-    }, [])
+    }, [reload])
 
 
 
@@ -90,24 +131,33 @@ export default function ActivityLog() {
 
     const deleteAllActivity = () =>{
         handleClose();
-        console.log("clear to request for deleting")
+        //console.log("clear to request for deleting")
+        axios.post(api+'/activity_log/delete', {})
+            .then((response) => {
+                setReload(!reload);
+                methods.activity(`${localStorage.getItem("auth_adminName")} cleared all activity logs`, "admin", localStorage.getItem("auth_adminUsername"));
+                toast.msg("Activity logs has been cleared", "green", 3000);
+            }, (error) => {
+
+            });
     }
 
-
+    if(actionLoading){
+        return <Loading/>
+    }
     if(loading){
         return <Loading/>
     }
     return (
         <div className='container col-6'>
             <h1 align='center'>Activity Logs</h1>
-
             <center>
                 <div className='col-4'>
                     <FormControl variant='filled' style={{padding:"5px"}} fullWidth>
-                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
                     <Select
                         value={selectedRole}
-                        label="Age"
+                        label="Select Role"
                         onChange={(e)=>setSelectedRole(e.target.value)}
                         
                     >
@@ -120,7 +170,9 @@ export default function ActivityLog() {
                 </div>
             </center>
 
-            {activityAll}
+            <br/><u><h2 align='center'>{activityAll.length} activities found</h2></u>
+
+            {activityAll.reverse()}
 
             <div style={{position:"fixed", bottom:"15px", right:"15px"}} onClick={handleClickOpen}>
                 <Box sx={{ '& > :not(style)': { m: 1 } }}>

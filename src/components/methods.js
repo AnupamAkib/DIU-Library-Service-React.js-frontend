@@ -137,6 +137,16 @@ function getDate(){
     return day+" "+getMonthName(month)+" "+year;
 }
 
+function getDate_short(){
+    const d = new Date();
+    let day = d.getDate();
+    if(day < 10) day = "0"+day;
+    let month = d.getMonth();
+    let year = d.getFullYear();
+    let sm = getMonthName(month);
+    return day+" "+sm[0]+sm[1]+sm[2]+" "+year;
+}
+
 function getMonthName(n){
     const months = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
@@ -150,4 +160,20 @@ function getTimeMilliseconds(){
     return time.toString();
 }
 
-export {API, getRandomOTP, Student_verification, Guard_verification, getDate, getMonthName, getTime, getTimeMilliseconds};
+function activity(log, role, username){
+    const dateTime = getDate_short() + ", " + getTime();
+    axios.post(API()+'/activity_log/add', {
+        //parameters
+        activity : log,
+        role : role,
+        username : username,
+        dateTime : dateTime
+    })
+        .then((response) => {
+            //response
+        }, (error) => {
+            console.log("failed to save activity log");
+        });
+}
+
+export {API, getRandomOTP, Student_verification, Guard_verification, getDate, getDate_short, getMonthName, getTime, getTimeMilliseconds, activity};

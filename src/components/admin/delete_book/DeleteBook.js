@@ -31,6 +31,7 @@ export default function DeleteBook(props) {
                 .then((response) => {
                     //response
                     setBtnLoading(false);
+                    methods.activity(`${localStorage.getItem("auth_adminName")} deleted book '${title.split(" ")[0]} ${title.split(" ")[1]}...'`, "admin", localStorage.getItem("auth_adminUsername"));
                     toast.msg("Book Deletion Successful", "green", 3000);
                     navigate("/admin/search_book/");
                 }, (error) => {

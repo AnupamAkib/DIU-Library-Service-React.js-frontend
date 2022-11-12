@@ -42,6 +42,7 @@ export default function ListCard(props) {
         localStorage.setItem("thumbnail", thumbnail);
         localStorage.setItem("bookLink", bookLink);
         localStorage.setItem("addedDate", addedDate);
+        methods.activity(`${localStorage.getItem("auth_studentName")} viewed book '${title.split(" ")[0]} ${title.split(" ")[1]}' from booklist`, "student", localStorage.getItem("auth_studentID"));
         navigate("/book/details/"+ID);
     }
     
@@ -56,6 +57,7 @@ export default function ListCard(props) {
         })
             .then((response) => {
                 toast.msg("Book removed from booklist", "red", 2500);
+                methods.activity(`${localStorage.getItem("auth_studentName")} removed book '${title.split(" ")[0]} ${title.split(" ")[1]}' from booklist`, "student", localStorage.getItem("auth_studentID"));
             }, (error) => {
                 console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
             });

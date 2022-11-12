@@ -1,25 +1,31 @@
 import { Button } from '@mui/material';
-import React, { useState } from 'react'
+import React from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import axios from 'axios';
 
-export default function GuardCard(props) {
-    const name = props.name;
-    const password = props.password;
-    const empID = props.empID;
-    const guardID = props.ID;
+export default function StuCard(props) {
+    const navigate = useNavigate();
 
+    const [btnLoading, setbtnLoading] = useState(false);
     const [open_del, setOpen_del] = useState(false);
-    const [btnLoading, setBtnLoading] = useState(false);
-    const [deleted, setDeleted] = useState(false);
 
-    const methods = require("../../methods.js");
-    const toast = require("../../toast.js");
+    const methods = require('../../methods.js');
     const api = methods.API();
+    let toast = require('../../toast.js');
+
+    const name = props.name;
+    const student_id = props.student_id;
+    const _id = props.id;
+    const email = props.email;
+    const password = props.password;
+    const department = props.department;
+    const batch = props.batch;
 
     const handleClickOpen = () => {
         setOpen_del(true);
@@ -29,37 +35,40 @@ export default function GuardCard(props) {
         setOpen_del(false);
     };
 
-    const removeGuard = () =>{
-        setBtnLoading(true);
-        axios.post(`${api}/guards/deleteGuard`, {
+    const removeStudent = () =>{
+        handleClose_del();
+        setbtnLoading(true);
+        axios.post(`${api}/student/deleteStudent`, {
             //parameters
-            _id : guardID
+            _id : _id
         })
             .then((response) => {
                 //console.log(response.data.status);
                 if(response.data.status=="done"){
                     //console.log(response.data.result)
-                    toast.msg("Guard Removed Successfully", "green", 3000);
-                    methods.activity(`${localStorage.getItem("auth_adminName")} removed '${name}' as security guard`, "admin", localStorage.getItem("auth_adminUsername"));
-                    setBtnLoading(false);
-                    setDeleted(true);
+                    toast.msg("Student Deleted Successfully", "green", 3000);
+                    setbtnLoading(false);
+                    methods.activity(`${localStorage.getItem("auth_adminName")} deleted a student with ID ${student_id}`, "admin", localStorage.getItem("auth_adminUsername"));
+                    navigate("/admin/view_users/redirect")
                 }
                 else{
                     toast.msg("Sorry, something went wrong", "", 3000);
                 }
-            }, (error) => {
-                console.log(error); 
+            }, (error1) => {
+                console.log(error1); 
                 toast.msg("Sorry, something went wrong", "", 3000);
-        });
-        handleClose_del();
+            });
     }
 
     return (
-        <div className='guardCard' style={{display:deleted?"none":""}}>
+        <div className='student_card'>
             <b>Name: </b>{name}<br/>
-            <b>Employee ID: </b>{empID}<br/>
+            <b>Student ID: </b>{student_id}<br/>
+            <b>DIU Email: </b>{email}<br/>
             <b>Password: </b>{password}<br/>
-            <Button align='right' variant='contained' color='error' style={{float:"right"}} onClick={handleClickOpen} disabled={btnLoading?true : false}>Remove</Button>
+            <b>Department: </b>{department}<br/>
+            <b>Batch: </b>{batch}<br/>
+            <Button variant='contained' color='error' onClick={handleClickOpen} disabled={btnLoading}>Delete</Button>
 
 
             <Dialog
@@ -73,12 +82,12 @@ export default function GuardCard(props) {
                     </DialogTitle>
                     <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Security guard '{name}' will be removed as security guard. Are you sure?
+                        Student '{name}' will be deleted from the system. That will make the student unregistered. Are you sure?
                     </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                     <Button onClick={handleClose_del}>No</Button>
-                    <Button onClick={removeGuard} autoFocus>
+                    <Button onClick={removeStudent} autoFocus>
                         Yes
                     </Button>
                     </DialogActions>

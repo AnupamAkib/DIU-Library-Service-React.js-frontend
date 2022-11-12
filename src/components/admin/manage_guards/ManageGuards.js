@@ -140,6 +140,7 @@ export default function ManageGuards() {
                             if(response1.data.status=="done"){
                                 //console.log(response.data.result)
                                 toast.msg("Security Guard Added successfully", "green", 3000);
+                                methods.activity(`${localStorage.getItem("auth_adminName")} added '${name}' as security guard`, "admin", localStorage.getItem("auth_adminUsername"));
                                 setAddBtnLoading(false);
                                 handleClose();
                                 setReload(!reload);

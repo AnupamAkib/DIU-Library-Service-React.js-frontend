@@ -45,7 +45,7 @@ const columns = [
 export default function ViewTable(props) {
   const [rows, setRows] = useState([])
   const methods = require('../methods.js');
-  const [selectHistory, setSelectHistory] = useState('today');
+  const [selectHistory, setSelectHistory] = useState('not returned');
 
   useEffect(() => {
     if(selectHistory=="all"){

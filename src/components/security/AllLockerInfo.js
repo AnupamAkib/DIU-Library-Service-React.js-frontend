@@ -177,6 +177,7 @@ export default function AllLockerInfo() {
                 .then((response) => {
                     if(response.data.status=="done"){
                         toast.msg(`Key ${keyNumber} is distributed to ${studentID}`, "green", 3200);
+                        methods.activity(`${localStorage.getItem("auth_guardName")} distributed key ${keyNumber} to ${studentID}`, "security guard", localStorage.getItem("auth_guardID"));
                         setLoading(!loading);
                         handleClose();
                     }
@@ -205,6 +206,7 @@ export default function AllLockerInfo() {
                     .then((response) => {
                         if(response.data.status=="done"){
                             toast.msg(`Key ${keyNumber} has been returned`, "green", 3200);
+                            methods.activity(`${localStorage.getItem("auth_guardName")} marked key ${keyNumber} as returned`, "security guard", localStorage.getItem("auth_guardID"));
                             setLoading(!loading);
                             handleClose_mark();
                         }

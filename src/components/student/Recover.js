@@ -96,6 +96,7 @@ export default function Recover(props) {
                 .then((response) => {
                     toast.msg("Password changed, please login", "green", 3000);
                     setBtnLoading(false);
+                    methods.activity(`${studentID} recovered his/her password`, "student", studentID);
                     navigate("/student/login");
                 }, (error) => {
                     console.log(error); toast.msg("Sorry, something went wrong", "", 3000);

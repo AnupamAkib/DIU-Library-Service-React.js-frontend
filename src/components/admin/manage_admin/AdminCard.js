@@ -62,12 +62,17 @@ export default function AdminCard(props) {
                     //console.log(response.data.result)
                     setBtnLoading(false);
                     toast.msg("Admin Deleted Successfully", "green", 3000);
+                    
                     if(localStorage.getItem("auth_adminUsername") == _username){
+                        methods.activity(`${localStorage.getItem("auth_adminName")} deleted himself/herself as an admin`, "admin", localStorage.getItem("auth_adminUsername"))
                         localStorage.setItem("auth_adminUsername", "");
                         localStorage.setItem("auth_adminPassword", "");
                         localStorage.setItem("props", "");
                         toast.msg("You are no more admin", "red", 2500);
                         navigate("/admin/login")
+                    }
+                    else{
+                        methods.activity(`${localStorage.getItem("auth_adminName")} deleted '${_name}' as an admin`, "admin", localStorage.getItem("auth_adminUsername"))
                     }
                     setdeleted(true);
                 }
@@ -166,6 +171,7 @@ export default function AdminCard(props) {
                     seteditBtnLoading(false);
                     handleClose();
                     toast.msg("Admin Edited Successfully", "green", 3000);
+                    methods.activity(`${localStorage.getItem("auth_adminName")} edited '${_name}'s admin information`, "admin", localStorage.getItem("auth_adminUsername"))
                     var md5 = require('md5');
                     if(localStorage.getItem("auth_adminUsername") == _username){
                         localStorage.setItem("auth_adminName", name);

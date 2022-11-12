@@ -23,7 +23,8 @@ import ManageAdmin from './components/admin/manage_admin/ManageAdmin';
 import RedirectToManageAdmin from './components/admin/manage_admin/RedirectToManageAdmin';
 import AdminLogin from './components/admin/login/AdminLogin';
 import ActivityLog from './components/admin/activity_log/ActivityLog';
-
+import ViewUsers from './components/admin/view_students/ViewUsers';
+import RedirectViewUser from './components/admin/view_students/RedirectViewUser';
 
 function App() {
   return (
@@ -55,6 +56,8 @@ function App() {
         <Route path='/admin/manage_admin' element={<ManageAdmin />} />
         <Route path='/admin/redirect' element={<RedirectToManageAdmin />} />
         <Route path='/admin/activity_logs' element={<ActivityLog />} />
+        <Route path='/admin/view_users' element={<ViewUsers />} />
+        <Route path='/admin/view_users/redirect' element={<RedirectViewUser />} />
         
       </Routes>
     </BrowserRouter>

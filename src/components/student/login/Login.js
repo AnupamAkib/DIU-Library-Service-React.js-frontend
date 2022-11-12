@@ -98,6 +98,7 @@ export default function Login() {
                         localStorage.setItem("auth_studentDept", response.data.result[0].programName);
                         localStorage.setItem("auth_password", md5(password));
                         setBtnLoading(false);
+                        methods.activity(`${response.data.result[0].studentName} logged in to the system`, "student", studentID);
                         navigate("/student");
                     }
                     else{

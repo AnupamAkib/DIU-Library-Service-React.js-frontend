@@ -45,6 +45,7 @@ export default function NextPhase(props) {
             })
                 .then((response) => {
                     toast.msg("Registration successful", "green", 3000);
+                    methods.activity(`${name} registered to the system`, "student", id);
                     localStorage.setItem("auth_studentID", id);
                     localStorage.setItem("auth_studentName", name);
                     localStorage.setItem("auth_password", md5(password));

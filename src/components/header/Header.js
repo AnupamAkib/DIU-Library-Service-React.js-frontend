@@ -128,7 +128,7 @@ const Header = () => {
       return (
         <>
                 <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_studentName")} ({localStorage.getItem("auth_studentID")})</Button>
-                <Button onClick={()=>{localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_studentName")} logged out from the system`, "student", localStorage.getItem("auth_studentID"));localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} sx={{ marginLeft: "10px" }} variant="contained">
                   Logout
                 </Button>
                 </>
@@ -138,7 +138,7 @@ const Header = () => {
       return (
         <>
         <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_guardName")}</Button>
-                <Button onClick={()=>{localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_guardName")} logged out from the system`, "security guard", localStorage.getItem("auth_guardID"));localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} sx={{ marginLeft: "10px" }} variant="contained">
                   Logout
                 </Button>
         </>
@@ -148,7 +148,7 @@ const Header = () => {
       return (
         <>
         <Button variant="" sx={{ marginLeft: "auto" }}>{localStorage.getItem("auth_adminName")}</Button>
-                <Button onClick={()=>{localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} sx={{ marginLeft: "10px" }} variant="contained">
+                <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_adminName")} logged out from the system`, "admin", localStorage.getItem("auth_adminUsername"));localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} sx={{ marginLeft: "10px" }} variant="contained">
                   Logout
                 </Button>
         </>

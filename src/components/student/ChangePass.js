@@ -34,6 +34,7 @@ export default function ChangePass() {
                     toast.msg("Password changed successfully", "green", 3000);
                     localStorage.setItem("auth_password", md5(newPass));
                     setBtnLoading(false);
+                    methods.activity(`${localStorage.getItem("auth_studentName")} changed his/her password`, "student", localStorage.getItem("auth_studentID"));
                     navigate("/student/");
                 }, (error) => {
                     console.log(error); toast.msg("Sorry, something went wrong", "", 3000);
