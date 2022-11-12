@@ -110,7 +110,13 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.30);
   margin-bottom: 15px;
 }
-
+.statistics_card{
+  background-color: #f0f0f0;
+  padding:10px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  float:left;
+}
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */
   [class*="col-"] {

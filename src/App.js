@@ -25,6 +25,7 @@ import AdminLogin from './components/admin/login/AdminLogin';
 import ActivityLog from './components/admin/activity_log/ActivityLog';
 import ViewUsers from './components/admin/view_students/ViewUsers';
 import RedirectViewUser from './components/admin/view_students/RedirectViewUser';
+import ViewStatistics from './components/admin/view_statistics/ViewStatistics';
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
         <Route path='/admin/activity_logs' element={<ActivityLog />} />
         <Route path='/admin/view_users' element={<ViewUsers />} />
         <Route path='/admin/view_users/redirect' element={<RedirectViewUser />} />
+        <Route path='/admin/view_statistics' element={<ViewStatistics />} />
         
       </Routes>
     </BrowserRouter>
