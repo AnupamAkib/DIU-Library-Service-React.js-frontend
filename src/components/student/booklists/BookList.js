@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Loading from '../../Loading'
 import { useNavigate } from 'react-router-dom'
+import Title from '../../Title'
 
 
 export default function BookList() {
@@ -58,27 +59,19 @@ export default function BookList() {
         return <Loading/>
     }
     return (
+        <><Title title="My Book List"/>
         <div className='container'>
-            <center>
-                <h1>My Book List</h1>
-            </center>
             {
                 booklist.length? booklist : 
                 <center>
                     <br/><br/><br/><br/>
-                    <div style={{
-                        backgroundImage: `url('/booklist.png')`, 
-                        height:"10vh",
-                        width:"10vh",
-                        backgroundRepeat:"no-repeat",
-                        backgroundSize: 'cover'
-                    }}>
-                    </div><br/>
+                    <i className='far fa-folder-open' style={{fontSize:"70px", opacity:"0.6", padding:"15px"}}></i>
+                    <br/>
                     <h2>
                     Nothing in your Booklist
                     </h2>
                 </center>
             }
-        </div>
+        </div></>
     )
 }

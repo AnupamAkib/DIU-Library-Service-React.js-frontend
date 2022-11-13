@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import { useNavigate } from 'react-router-dom'
-
+import Title from "../../Title"
 
 const style = {
     position: 'absolute',
@@ -171,7 +171,7 @@ export default function ManageGuards() {
     return (
         <>
             <div className='container col-5'>
-                <h1 align='center'>Security Guards</h1>
+                <Title title="Security Guards"/>
                 {guards}
             </div>
 
@@ -195,7 +195,7 @@ export default function ManageGuards() {
                             <TextField value={name} onChange={(e)=>setName(e.target.value)} variant='filled' label="Enter Name" style={{marginBottom:"8px"}} fullWidth required/>
                             <TextField type='number' value={empID} onChange={(e)=>setEmpID(e.target.value)} variant='filled' label="Enter Employee ID" style={{marginBottom:"8px"}} fullWidth required/>
                             <TextField value={password} onChange={(e)=>setPassword(e.target.value)} variant='filled' label="Set a password" style={{marginBottom:"8px"}} fullWidth required/>
-                            <Button type='submit' variant='contained' fullWidth disabled={addBtnLoading? true : false}>Add guard</Button>
+                            <Button type='submit' variant='contained' fullWidth disabled={addBtnLoading? true : false}><i className="fas fa-user-shield" style={{marginRight:"8px"}}></i>Add guard</Button>
                         </form>
                     </Box>
                 </Modal>

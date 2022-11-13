@@ -17,7 +17,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
-
+import Title from "../../Title"
 
 export default function ActivityLog() {
     const navigate = useNavigate();
@@ -150,7 +150,7 @@ export default function ActivityLog() {
     }
     return (
         <div className='container col-6'>
-            <h1 align='center'>Activity Logs</h1>
+            <Title title="Activity Logs"/>
             <center>
                 <div className='col-4'>
                     <FormControl variant='filled' style={{padding:"5px"}} fullWidth>

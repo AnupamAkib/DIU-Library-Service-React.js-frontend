@@ -8,6 +8,9 @@ export default function ViewStudent() {
     const navigate = useNavigate();
     const methods = require("../methods.js");
     const toast = require("../toast.js");
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     const [studentID, setStudentID] = useState("");
     const [ID, setID] = useState("");

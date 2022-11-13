@@ -122,15 +122,15 @@ export default function Login() {
                 <center>
                     <img src="/library_logo.png" width="200px"/><br/><br/>
                 </center>
-                <h1 align='center'>Student Login</h1>
+                <h1 align='center'>Student Login</h1><br/>
                 <form onSubmit={checkLogin}>
                     <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
                     <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Password==""? false : true} helperText={errorMsg_Password} required/><br/>
-                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(errorMsg_ID=="" && studentID.length && errorMsg_Password=="" && password.length)? btnLoading? true : false : true}>Login</Button>
+                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(errorMsg_ID=="" && studentID.length && errorMsg_Password=="" && password.length)? btnLoading? true : false : true}><i className="fa fa-sign-in" style={{marginRight:"8px"}}></i>Login</Button>
                 </form>
 
                 <center><div style={{padding:"8px"}}>OR</div></center>
-                <Button onClick={()=>navigate("/student/registration")} variant="contained" style={{background:"green"}} fullWidth>register new account</Button>
+                <Button onClick={()=>navigate("/student/registration")} variant="contained" style={{background:"green"}} fullWidth><i className="fas fa-user-plus" style={{marginRight:"8px"}}></i>register new account</Button>
                 <br/><br/>
                 <Button onClick={()=>navigate("/student/password_recovery")} variant="text" fullWidth>Forgot your password?</Button>
             </div>

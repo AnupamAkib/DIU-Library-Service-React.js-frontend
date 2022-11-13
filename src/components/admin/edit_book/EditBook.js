@@ -185,7 +185,7 @@ export default function EditBook() {
                         <TextField value={description} onChange={(e)=>setDescription(e.target.value)} label="Book Description" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_description==""? false : description.length<=900? false : true} helperText={errorMsg_description} placeholder="Write details about the book" rows={2} maxRows={4} multiline required/><br/>
                         <TextField placeholder="CSE, SWE, IT, BBA" value={tags} onChange={(e)=>setTags(e.target.value)} label="Tags (Seperate by comma (,))" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_tags==""? false : tags.length<=50? false : true} helperText={errorMsg_tags} required/><br/>
                     </div>
-                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(title.length<=70 && title!="" && writer.length<=30 && writer!="" && description.length<=900 && description!="" && tags.length<=50 && tags!="")? false : true}>save changes</Button>
+                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(title.length<=70 && title!="" && writer.length<=30 && writer!="" && description.length<=900 && description!="" && tags.length<=50 && tags!="")? false : true}><i className="fas fa-save" style={{marginRight:"8px"}}></i>save changes</Button>
                 </form>
             </div>
         </div>

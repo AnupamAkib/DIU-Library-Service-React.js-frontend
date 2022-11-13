@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../Loading';
 import { Button } from '@mui/material';
+import Title from '../../Title';
 
 export default function StudentHomePage() {
   const navigate = useNavigate();
@@ -113,7 +114,7 @@ export default function StudentHomePage() {
     return (
         <div className='container'>
             <center>
-                <h1>All Books</h1>
+                <Title title="All Books"/>
                 <input onChange={(e)=>setSearchKey(e.target.value)} value={searchKey} type="search" style={{outline:"none", width:"90%", padding:"12px", fontSize:"large"}} placeholder="Search book, author, tags"/>
             </center>
             <br/>

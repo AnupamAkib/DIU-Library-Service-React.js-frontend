@@ -26,42 +26,44 @@ import ActivityLog from './components/admin/activity_log/ActivityLog';
 import ViewUsers from './components/admin/view_students/ViewUsers';
 import RedirectViewUser from './components/admin/view_students/RedirectViewUser';
 import ViewStatistics from './components/admin/view_statistics/ViewStatistics';
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
     <BrowserRouter>
-    <Header/>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/student/' element={<StudentHomePage />} />
-        <Route path='/book/details/:bookID' element={<BookDetails />} />
-        <Route path='/book/read/:bookID' element={<ReadBook />} />
-        <Route path='/student/booklist' element={<BookList />} />
-        <Route path='/student/registration' element={<Registration />} />
-        <Route path='/student/login' element={<Login />} />
-        <Route path='/student/change_password' element={<ChangePass />} />
-        <Route path='/student/password_recovery' element={<PassRecovery />} />
+      <Header/>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/student/' element={<StudentHomePage />} />
+          <Route path='/book/details/:bookID' element={<BookDetails />} />
+          <Route path='/book/read/:bookID' element={<ReadBook />} />
+          <Route path='/student/booklist' element={<BookList />} />
+          <Route path='/student/registration' element={<Registration />} />
+          <Route path='/student/login' element={<Login />} />
+          <Route path='/student/change_password' element={<ChangePass />} />
+          <Route path='/student/password_recovery' element={<PassRecovery />} />
 
 
-        <Route path='/guards/all_distributed_key' element={<AllLockerInfo />} />
-        <Route path='/guards/login' element={<SecurityLogin />} />
-        <Route path='/guards/view_student_info' element={<ViewStudent />} />
+          <Route path='/guards/all_distributed_key' element={<AllLockerInfo />} />
+          <Route path='/guards/login' element={<SecurityLogin />} />
+          <Route path='/guards/view_student_info' element={<ViewStudent />} />
 
-        <Route path='/admin/login' element={<AdminLogin />} />
-        <Route path='/admin' element={<AdminDashboard />} />
-        <Route path='/admin/add_book' element={<AddBook />} />
-        <Route path='/admin/search_book/:action' element={<SearchBook />} />
-        <Route path='/admin/search_book/' element={<ReDirect />} />
-        <Route path='/admin/edit_book/:bookID' element={<EditBook />} />
-        <Route path='/admin/manage_guards' element={<ManageGuards />} />
-        <Route path='/admin/manage_admin' element={<ManageAdmin />} />
-        <Route path='/admin/redirect' element={<RedirectToManageAdmin />} />
-        <Route path='/admin/activity_logs' element={<ActivityLog />} />
-        <Route path='/admin/view_users' element={<ViewUsers />} />
-        <Route path='/admin/view_users/redirect' element={<RedirectViewUser />} />
-        <Route path='/admin/view_statistics' element={<ViewStatistics />} />
-        
-      </Routes>
+          <Route path='/admin/login' element={<AdminLogin />} />
+          <Route path='/admin' element={<AdminDashboard />} />
+          <Route path='/admin/add_book' element={<AddBook />} />
+          <Route path='/admin/search_book/:action' element={<SearchBook />} />
+          <Route path='/admin/search_book/' element={<ReDirect />} />
+          <Route path='/admin/edit_book/:bookID' element={<EditBook />} />
+          <Route path='/admin/manage_guards' element={<ManageGuards />} />
+          <Route path='/admin/manage_admin' element={<ManageAdmin />} />
+          <Route path='/admin/redirect' element={<RedirectToManageAdmin />} />
+          <Route path='/admin/activity_logs' element={<ActivityLog />} />
+          <Route path='/admin/view_users' element={<ViewUsers />} />
+          <Route path='/admin/view_users/redirect' element={<RedirectViewUser />} />
+          <Route path='/admin/view_statistics' element={<ViewStatistics />} />
+          
+        </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

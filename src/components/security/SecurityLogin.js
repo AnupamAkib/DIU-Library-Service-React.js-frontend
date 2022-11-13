@@ -72,7 +72,7 @@ export default function Login() {
                 <form onSubmit={checkSecurityGuardLogin}>
                     <TextField value={employeeID} onChange={(e)=>setEmployeeID(e.target.value)} label="Enter Employee ID" variant="filled" style={{marginBottom:"8px"}} fullWidth required/><br/>
                     <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth required/><br/>
-                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(employeeID.length && password.length)? btnLoading? true : false : true}>Login</Button>
+                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(employeeID.length && password.length)? btnLoading? true : false : true}><i className="fas fa-sign-in" style={{marginRight:"8px"}}></i>Login</Button>
                 </form>
             </div>
         </div>

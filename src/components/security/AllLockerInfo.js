@@ -13,6 +13,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
+import Title from "../Title"
 
 const style = {
   position: 'absolute',
@@ -44,6 +45,9 @@ export default function AllLockerInfo() {
         }
     }, [])
     
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     const handleOpen = () => {
         setStudentID("");
@@ -232,8 +236,7 @@ export default function AllLockerInfo() {
 
     return (
         <div className='container'>
-            <h1 align='center'>Locker Key History</h1>
-
+            <Title title="Locker Key History"/>
 
             {allLockerInfo.length? 
             <ViewTable data = {allLockerInfo}/>

@@ -9,7 +9,10 @@ import { useNavigate } from 'react-router-dom';
 export default function Dashboard() {
     const navigate = useNavigate();
 
-
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+    
     const methods = require('../methods.js');
     const api = methods.API();
     let toast = require('../toast.js');
@@ -41,7 +44,7 @@ export default function Dashboard() {
                                 setAction(oldArray => [...oldArray, <Card href="/admin/search_book/edit" icon="fas fa-edit">Edit Book</Card>]);
                             }
                             if(access[k]==3){
-                                setAction(oldArray => [...oldArray, <Card href="/admin/search_book/delete" icon="far fa-trash-alt">Delete Book</Card>]);
+                                setAction(oldArray => [...oldArray, <Card href="/admin/search_book/delete" icon="fas fa-trash">Delete Book</Card>]);
                             }
                             if(access[k]==4){
                                 setAction(oldArray => [...oldArray, <Card href="/admin/view_users" icon="fas fa-users">View Users</Card>]);
@@ -53,10 +56,10 @@ export default function Dashboard() {
                                 setAction(oldArray => [...oldArray, <Card href="/admin/manage_admin" icon="fas fa-user-tie">Manage Admin</Card>]);
                             }
                             if(access[k]==7){
-                                setAction(oldArray => [...oldArray, <Card href="/admin/view_statistics" icon="fa fa-line-chart">View Statistics</Card>]);
+                                setAction(oldArray => [...oldArray, <Card href="/admin/view_statistics" icon="fa fa-bar-chart">View Statistics</Card>]);
                             }
                             if(access[k]==8){
-                                setAction(oldArray => [...oldArray, <Card href="/admin/activity_logs" icon="fa fa-list-ul">Activity Logs</Card>]);
+                                setAction(oldArray => [...oldArray, <Card href="/admin/activity_logs" icon="fas fa-history">Activity Logs</Card>]);
                             }
                         }
                         setActionLoading(false);
@@ -76,7 +79,7 @@ export default function Dashboard() {
         <div className='container col-5'>
             <div align='center' style={{padding:"15px 20px 15px 20px"}}>
               <h1>Welcome Admin</h1>
-              Click on the action that you want to perform. You have the access to perform the following actions.
+              Hello <b>{localStorage.getItem("auth_adminUsername")}</b>, Click on the action that you want to perform. You have the access to perform the following actions.
             </div>
             {actionLoading? <Loading/> : action}
         </div>

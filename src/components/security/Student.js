@@ -156,6 +156,6 @@ export default function Student(props) {
         )
     }
     else{
-        return <div align='center' style={{background:"#fff", padding:"15px", marginTop:"100px"}} className="container col-5"><h1 align='center'>Student Not Found</h1>Please check your student ID</div>
+        return <div align='center' style={{background:"#fff", padding:"15px", marginTop:"100px"}} className="container col-5"><i className='fas fa-user-alt-slash' style={{fontSize:"60px", opacity:"0.6", marginBottom:"22px"}}></i><h1 align='center'>Student Not Found</h1>Please check your student ID</div>
     }
 }

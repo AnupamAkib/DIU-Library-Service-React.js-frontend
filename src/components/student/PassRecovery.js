@@ -126,7 +126,7 @@ export default function PassRecovery() {
                         <Recover ID={studentID} OTP={OTP}/> : 
                         <form onSubmit={sendOTP}>
                             <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_studentID==""? false : true} helperText={errorMsg_studentID} required/><br/>
-                            <Button type="submit" variant="contained" fullWidth disabled={(errorMsg_studentID=="" && studentID.length)? btnLoading? true : false : true}>Next</Button>
+                            <Button type="submit" variant="contained" fullWidth disabled={(errorMsg_studentID=="" && studentID.length)? btnLoading? true : false : true}><i className="fas fa-arrow-right" style={{marginRight:"8px"}}></i>Next</Button>
                         </form>
                     }
                 </div>

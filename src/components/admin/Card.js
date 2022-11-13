@@ -27,7 +27,7 @@ export default function Card(props) {
                 <CardActionArea>
                     <Paper elevation={3} style={{height:"100%", fontSize:"large", padding:"5px"}}>
                         <center>
-                            <i className={icon} style={{fontSize:40, padding:"27px"}}></i><br/>
+                            <i className={icon} style={{fontSize:40, padding:"27px", opacity:"0.9"}}></i><br/>
                             {text}
                         </center>
                     </Paper>

@@ -118,7 +118,7 @@ export default function Recover(props) {
                 <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass_init==""? false : true} helperText={errorMsg_Pass_init} required/><br/>
                 <TextField type="password" value={rePassword} onChange={(e)=>setRePassword(e.target.value)} label="Re-enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass==""? false : true} helperText={errorMsg_Pass} required/><br/>
                 
-                <Button disabled={(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length)? btnLoading? true : false : true} type="submit" variant="contained" fullWidth>Change Password</Button>
+                <Button disabled={(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length)? btnLoading? true : false : true} type="submit" variant="contained" fullWidth><i className="fa fa-key" style={{marginRight:"8px"}}></i>Change Password</Button>
             </form>
         
         </div>

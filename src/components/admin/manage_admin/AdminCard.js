@@ -225,8 +225,8 @@ export default function AdminCard(props) {
                     </td>
                 </tr>
             </table>
-            <Button variant="contained" style={{marginRight:"7px", width:"90px"}} onClick={handleOpen}>Edit</Button>
-            <Button variant="contained" style={{width:"90px"}} color='error' onClick={handleClickOpen_del} disabled={btnLoading}>Delete</Button>
+            <Button variant="contained" style={{marginRight:"7px", width:"95px"}} onClick={handleOpen}><i className="fas fa-user-edit" style={{marginRight:"8px"}}></i>Edit</Button>
+            <Button variant="contained" style={{width:"95px"}} color='error' onClick={handleClickOpen_del} disabled={btnLoading}><i className="fas fa-trash" style={{marginRight:"8px"}}></i>Delete</Button>
 
 
             <Dialog
@@ -314,7 +314,7 @@ export default function AdminCard(props) {
                                 false
                                 :
                                 true
-                                }>Save changes</Button>
+                                }><i className="fas fa-save" style={{marginRight:"8px"}}></i>Save changes</Button>
                         </form>
                     </Box>
                 </Modal>

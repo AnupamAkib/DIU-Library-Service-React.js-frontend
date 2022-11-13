@@ -166,7 +166,7 @@ export default function NextPhase(props) {
             <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass_init==""? false : true} helperText={errorMsg_Pass_init} required/><br/>
             <TextField type="password" value={rePassword} onChange={(e)=>setRePassword(e.target.value)} label="Re-enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Pass==""? false : true} helperText={errorMsg_Pass} required/><br/>
             
-            <Button disabled={(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length)? registrationBtnLoading? true : false : true} type="submit" variant="contained" fullWidth>Register</Button>
+            <Button disabled={(errorMsg_OTP=="" && OTP.length && errorMsg_Pass_init=="" && password.length && errorMsg_Pass=="" && rePassword.length)? registrationBtnLoading? true : false : true} type="submit" variant="contained" fullWidth><i className="fas fa-user-check" style={{marginRight:"8px"}}></i>Register</Button>
         </form>
     )
 }

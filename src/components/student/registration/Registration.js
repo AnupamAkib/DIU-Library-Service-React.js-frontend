@@ -182,10 +182,11 @@ export default function Registration() {
                     <NextPhase id={studentID} email={studentEmail} name={studentName} department={department} degree={degreeName} batch={batch} otp={OTP}/>
                 :
                     <>
+                    <div style={{padding:"0px 12px 12px 12px"}}><center>Enter your student ID and DIU email address to start the student registration process</center></div>
                     <form onSubmit={initialFormSubmit}>
                         <TextField value={studentID} onChange={(e)=>setStudentID(e.target.value)} label="Enter Student ID" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_ID==""? false : true} helperText={errorMsg_ID} required/><br/>
                         <TextField value={studentEmail} onChange={(e)=>setStudentEmail(e.target.value)} label="Enter DIU Email" variant="filled" style={{marginBottom:"8px"}} fullWidth error={errorMsg_Email==""? false : true} helperText={errorMsg_Email} required/><br/>
-                        <Button type="submit" variant="contained" fullWidth disabled={(studentID.length && studentEmail.length && errorMsg_ID=="" && errorMsg_Email=="")?  nextBtnLoading? true : false : true}>NEXT</Button>
+                        <Button type="submit" variant="contained" fullWidth disabled={(studentID.length && studentEmail.length && errorMsg_ID=="" && errorMsg_Email=="")?  nextBtnLoading? true : false : true}><i className="fas fa-arrow-right" style={{marginRight:"8px"}}></i>NEXT</Button>
                     </form><br/>
                     <Button size="small" onClick={()=>navigate("/student/login")} variant="text" fullWidth>Already registered? login here</Button>
                     </>

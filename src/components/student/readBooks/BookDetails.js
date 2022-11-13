@@ -14,6 +14,10 @@ export default function BookDetails() {
         }
     })
 
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     const { bookID } = useParams();
     const [loading, setLoading] = useState(localStorage.getItem("ID")==""?true:false);
 
@@ -153,11 +157,11 @@ export default function BookDetails() {
             <b>Book Added: </b>{addedDate}<br/><br/>
 
             <div className='container col-6'>
-                <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_studentName")} read book '${title}'`, "student", localStorage.getItem("auth_studentID"));navigate("/book/read/"+_id)}} variant="contained" fullWidth>Read book</Button>
+                <Button style={{background:"#09509e"}} onClick={()=>{methods.activity(`${localStorage.getItem("auth_studentName")} read book '${title}'`, "student", localStorage.getItem("auth_studentID"));navigate("/book/read/"+_id)}} variant="contained" fullWidth><i className='fas fa-book-open' style={{marginRight:"8px"}}></i>Read book</Button>
                 {
                     bookListBtnLoading? <Button varient="contained" fullWidth disabled>Wait</Button> : 
-                    bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"gray", marginTop:"10px"}} variant="contained" fullWidth>REmove from book list</Button> : 
-                    <Button onClick={()=> saveInBookList()} style={{background:"green", marginTop:"10px"}} variant="contained" fullWidth>save in my book list</Button>
+                    bookListFlag? <Button onClick={()=> removeFromList()} style={{background:"gray", marginTop:"10px"}} variant="contained" fullWidth><i className='fas fa-trash' style={{marginRight:"8px"}}></i>REmove from book list</Button> : 
+                    <Button onClick={()=> saveInBookList()} style={{background:"#39b24a", marginTop:"10px"}} variant="contained" fullWidth><i className='fa fa-save' style={{marginRight:"8px"}}></i>save in my book list</Button>
                 }
             </div>
             </div>

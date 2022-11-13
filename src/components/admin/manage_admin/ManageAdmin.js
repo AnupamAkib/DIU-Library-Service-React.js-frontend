@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {Checkbox, FormControlLabel} from '@mui/material'
 import Loading from '../../Loading.js'
-
+import Title from "../../Title"
 
 
 const style = {
@@ -201,7 +201,7 @@ export default function ManageAdmin() {
 
     return (
         <div className='container col-5'>
-            <h1 align='center'>Manage Admin</h1>
+            <Title title = "Manage Admin" />
             {admins}
 
 
@@ -275,7 +275,7 @@ export default function ManageAdmin() {
                                 false
                                 :
                                 true
-                                }>Add admin</Button>
+                                }><i className="fas fa-user-plus" style={{marginRight:"8px"}}></i>Add admin</Button>
                         </form>
                     </Box>
                 </Modal>

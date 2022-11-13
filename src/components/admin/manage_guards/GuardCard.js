@@ -59,7 +59,7 @@ export default function GuardCard(props) {
             <b>Name: </b>{name}<br/>
             <b>Employee ID: </b>{empID}<br/>
             <b>Password: </b>{password}<br/>
-            <Button align='right' variant='contained' color='error' style={{float:"right"}} onClick={handleClickOpen} disabled={btnLoading?true : false}>Remove</Button>
+            <Button align='right' variant='contained' color='error' style={{float:"right"}} onClick={handleClickOpen} disabled={btnLoading?true : false}><i className="fas fa-trash" style={{marginRight:"8px"}}></i>Remove</Button>
 
 
             <Dialog

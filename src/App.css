@@ -115,7 +115,23 @@
   padding:10px;
   border-radius: 10px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
-  float:left;
+  height:140px;
+  margin:5px
+}
+.footer_box{
+  clear: both;
+  background-color: #fff;
+  color:#000;
+  margin-top:50px;
+  padding:30px 30px 30px 30px;
+}
+.title{
+  background-color: transparent;
+  color:#000;
+  padding:12px;
+}
+.project_card{
+  padding:12px;
 }
 @media only screen and (max-width: 1000px) {
   /* For mobile phones: */

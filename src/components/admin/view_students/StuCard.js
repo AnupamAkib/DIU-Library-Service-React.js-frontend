@@ -68,7 +68,7 @@ export default function StuCard(props) {
             <b>Password: </b>{password}<br/>
             <b>Department: </b>{department}<br/>
             <b>Batch: </b>{batch}<br/>
-            <Button variant='contained' color='error' onClick={handleClickOpen} disabled={btnLoading}>Delete</Button>
+            <Button variant='contained' color='error' onClick={handleClickOpen} disabled={btnLoading}><i className="fas fa-trash" style={{marginRight:"8px"}}></i>Delete</Button>
 
 
             <Dialog

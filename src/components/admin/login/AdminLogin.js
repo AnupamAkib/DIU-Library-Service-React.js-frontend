@@ -78,7 +78,7 @@ export default function AdminLogin() {
                 <form onSubmit={checkLogin}>
                     <TextField value={username} onChange={(e)=>setUsername(e.target.value)} label="Enter Username" variant="filled" style={{marginBottom:"8px"}} fullWidth required/><br/>
                     <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Password" variant="filled" style={{marginBottom:"8px"}} fullWidth required/><br/>
-                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(username.length && password.length)? btnLoading? true : false : true}>Login</Button>
+                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(username.length && password.length)? btnLoading? true : false : true}><i className='fas fa-sign-in' style={{marginRight:"8px"}}></i>Login</Button>
                 </form>
 
             </div>

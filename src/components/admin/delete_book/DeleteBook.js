@@ -49,7 +49,7 @@ export default function DeleteBook(props) {
             Are you sure you want to delete the book? <font color='red'>The book will be deleted permanently</font> from the system. Enter your admin password below to delete the book.<br/>
             <form onSubmit={deleteBook}>
                 <TextField type="password" value={password} onChange={(e)=>setPassword(e.target.value)} label="Enter Admin Password" variant="filled" style={{marginTop:"8px", marginBottom:"8px"}} fullWidth required/><br/>
-                <Button type="submit" color="error" variant='contained' fullWidth>Delete this book</Button>
+                <Button type="submit" color="error" variant='contained' fullWidth><i className="fas fa-trash" style={{marginRight:"8px"}}></i>Delete this book</Button>
             </form>
         </div>
     )

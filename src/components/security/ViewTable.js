@@ -111,7 +111,7 @@ export default function ViewTable(props) {
                     </Select>
                 </FormControl>
             </div>
-            <Button variant='contained' onClick={()=>window.print()} color='inherit' size="small">Print This History</Button>
+            <Button variant='contained' onClick={()=>window.print()} color='inherit' size="small"><i className="fas fa-print" style={{marginRight:"8px"}}></i>Print This History</Button>
             </center><br/>
 
     {rows.length?

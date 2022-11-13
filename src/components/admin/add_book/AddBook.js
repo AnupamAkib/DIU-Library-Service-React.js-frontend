@@ -251,7 +251,7 @@ export default function AddBook() {
                         </div>
                     </div>
                     
-                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(title.length<=70 && title!="" && writer.length<=30 && writer!="" && description.length<=900 && description!="" && tags.length<=50 && tags!="")? false : true}>ADD BOOK</Button>
+                    <Button size="large" type="submit" variant="contained" fullWidth disabled={(title.length<=70 && title!="" && writer.length<=30 && writer!="" && description.length<=900 && description!="" && tags.length<=50 && tags!="")? false : true}><i className="fas fa-book" style={{marginRight:"8px"}}></i>ADD BOOK</Button>
                 </form>
             </div>
         </div>

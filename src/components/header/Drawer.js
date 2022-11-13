@@ -42,31 +42,31 @@ const DrawerComp = (props) => {
     const studentLogout = () =>{
       return (
         <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_studentName")} logged out from the system`, "student", localStorage.getItem("auth_studentID")); setOpenDrawer(false); localStorage.setItem("auth_studentID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/student/login")}} variant="text">
-          Logout
+          <i className="fas fa-sign-out" style={{marginRight:"8px"}}></i>Logout
         </Button>
       )
     }
     const guardLogout = () =>{
       return (
         <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_guardName")} logged out from the system`, "security guard", localStorage.getItem("auth_guardID"));setOpenDrawer(false); localStorage.setItem("auth_guardID", ""); toast.msg("You have been logged out", "red", 3000); navigate("/guards/login")}} variant="text">
-          Logout
+          <i className="fas fa-sign-out" style={{marginRight:"8px"}}></i>Logout
         </Button>
       )
     }
     const adminLogout = () =>{
       return (
         <Button onClick={()=>{methods.activity(`${localStorage.getItem("auth_adminName")} logged out from the system`, "admin", localStorage.getItem("auth_adminUsername"));setOpenDrawer(false); localStorage.setItem("auth_adminUsername", ""); toast.msg("You have been logged out", "red", 3000); navigate("/admin/login")}} variant="text">
-          Logout
+          <i className="fas fa-sign-out" style={{marginRight:"8px"}}></i>Logout
         </Button>
       )
     }
     const loginOrSignUp = () =>{
       return (<>
         <Button onClick={()=>{setOpenDrawer(false); navigate("/student/login")}} variant="text" fullWidth>
-          Login
+          <i className="fas fa-sign-in" style={{marginRight:"8px"}}></i>Login
         </Button>
         <Button style={{marginTop:"10px"}} onClick={()=>{setOpenDrawer(false); navigate("/student/registration")}} variant="text" fullWidth>
-          SignUp
+          <i className="fas fa-user-plus" style={{marginRight:"8px"}}></i>SignUp
         </Button>
         </>
       )
@@ -76,14 +76,13 @@ const DrawerComp = (props) => {
     return (
       <React.Fragment>
         <Drawer
-        
           anchor="left"
           open={openDrawer}
           onClose={() => setOpenDrawer(false)}
         >
-          <br/>
-              <center><img src="/library_logo.png" width="150" onClick={()=>{setOpenDrawer(false);navigate("/")}}/></center>
-              <br/>
+          <br/><br/><br/>
+              <center><img style={{marginTop:"8px"}} src="/library_logo.png" width="150" onClick={()=>{setOpenDrawer(false);navigate("/")}}/></center>
+              <hr/>
           {
             localStorage.getItem("auth_studentID") && role=="student"?
             <div style={{padding:"18px"}}>
@@ -94,7 +93,7 @@ const DrawerComp = (props) => {
             </div> : 
             localStorage.getItem("auth_guardID") && role=="guards"?
             <div style={{padding:"18px"}}>
-              <b>{localStorage.getItem("auth_guardName")}</b>
+              <b className="capitalize">{localStorage.getItem("auth_guardName")}</b>
               <br/>
               <b>EmpID:</b> {localStorage.getItem("auth_guardID")}<br/>
               <b>Role:</b> Security Guard<br/>
@@ -111,7 +110,7 @@ const DrawerComp = (props) => {
             {pages.map((page, index) => (
               <ListItemButton key={index} onClick={()=>navigate(page.href)}>
                 <ListItemIcon>
-                  <ListItemText>{page.text}</ListItemText>
+                  <ListItemText><i className={page.icon} style={{marginRight:"8px"}}></i>{page.text}</ListItemText>
                 </ListItemIcon>
               </ListItemButton>
             ))}
